@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import LayoutFiverr from "./Components/Layout/LayoutFiverr";
+import LayoutFiverr from "./components/Layout/LayoutFiverr";
 import TrangAdmin from "./pages/TrangAdmin/TrangAdmin";
 import TrangChiTietCongViec from "./pages/TrangChiTietCongViec/TrangChiTietCongViec";
 import TrangChiTietThongTinCaNhan from "./pages/TrangChiTietThongTinCaNhan/TrangChiTietThongTinCaNhan";
@@ -17,10 +17,6 @@ function App() {
       <TrangLoading />
       <BrowserRouter>
         <Routes>
-          {/* Đây là phần demo thui ^^. Đừng xoá nha
-          <Route element={<Layout Component={...}/>} />
-           */}
-
           {/* TrangAdmin */}
           <Route path="/" element={<LayoutFiverr Component={TrangAdmin} />} />
 

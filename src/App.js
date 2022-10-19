@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import "antd/dist/antd.css";
+import "./assets/styleAdmin.css";
 import LayoutFiverr from "./components/Layout/LayoutFiverr";
 import TrangAdmin from "./pages/TrangAdmin/TrangAdmin";
 import TrangChiTietCongViec from "./pages/TrangChiTietCongViec/TrangChiTietCongViec";
@@ -10,6 +12,7 @@ import TrangDangNhap from "./pages/TrangDangNhap/TrangDangNhap";
 import TrangDanhSachCongViec from "./pages/TrangDanhSachCongViec/TrangDanhSachCongViec";
 import TrangDanhSachCongViecVaLoaiCongViec from "./pages/TrangDanhSachCongViecVaLoaiCongViec/TrangDanhSachCongViecVaLoaiCongViec";
 import TrangLoading from "./pages/TrangLoading/TrangLoading";
+import TrangQuanLyUser from "./pages/TrangAdmin/TrangQuanLyUser/TrangQuanLyUser";
 
 function App() {
   return (
@@ -18,7 +21,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* TrangAdmin */}
-          <Route path="/" element={<LayoutFiverr Component={TrangAdmin} />} />
+          {/* <Route path="/" element={<LayoutFiverr Component={TrangAdmin} />} /> */}
+          <Route
+            path="/admin"
+            element={<TrangAdmin Component={TrangQuanLyUser} />}
+          />
 
           {/* TrangChiTietCongViec */}
           <Route

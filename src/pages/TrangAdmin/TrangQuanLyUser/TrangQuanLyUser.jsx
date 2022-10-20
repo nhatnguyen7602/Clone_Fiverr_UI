@@ -8,6 +8,7 @@ import {
 import React, { Fragment, useEffect, useState } from "react";
 import { userServ } from "../../../services/serviceNguoiDung";
 import { NavLink } from "react-router-dom";
+import TrangThemUser from "../TrangThemUser/TrangThemUser";
 const columns = [
   {
     title: "Mã số",
@@ -34,9 +35,9 @@ const columns = [
     key: "id",
     render: (role) =>
       role === "ADMIN" ? (
-        <Tag color="gold">{role}</Tag>
+        <Tag color="#e63946">Quản trị viên</Tag>
       ) : (
-        <Tag color="cyan">{role}</Tag>
+        <Tag color="#457b9d">Khách hàng</Tag>
       ),
     width: "15%",
   },
@@ -104,15 +105,16 @@ const TrangQuanLyUser = () => {
             }}
             onClick={showModal}
           />
+
           <Modal
-            title="Basic Modal"
+            title="Thêm người dùng"
+            centered
             open={isModalOpen}
             onOk={handleOk}
             onCancel={handleCancel}
+            footer={null}
           >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            <TrangThemUser />
           </Modal>
         </div>
       </div>

@@ -4,6 +4,7 @@ import "antd/dist/antd.css";
 import CategoriesMenu from "./Components/Layout/CategoriesMenu/CategoriesMenu";
 import LayoutFiverr from "./Components/Layout/LayoutFiverr";
 import LayoutTrangCongViec from "./Components/Layout/LayoutTrangCongViec";
+import LayoutFiverr from "./components/Layout/LayoutFiverr";
 import TrangAdmin from "./pages/TrangAdmin/TrangAdmin";
 import TrangChiTietCongViec from "./pages/TrangChiTietCongViec/TrangChiTietCongViec";
 import TrangChiTietThongTinCaNhan from "./pages/TrangChiTietThongTinCaNhan/TrangChiTietThongTinCaNhan";
@@ -17,7 +18,7 @@ import TrangLoading from "./pages/TrangLoading/TrangLoading";
 function App() {
   return (
     <div className="App">
-      {/* <TrangLoading /> */}
+      <TrangLoading />
       <BrowserRouter>
         <Routes>
           {/* Đây là phần demo thui ^^. Đừng xoá nha

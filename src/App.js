@@ -1,6 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import "antd/dist/antd.css";
+import CategoriesMenu from "./Components/Layout/CategoriesMenu/CategoriesMenu";
 import LayoutFiverr from "./Components/Layout/LayoutFiverr";
+import LayoutTrangCongViec from "./Components/Layout/LayoutTrangCongViec";
 import TrangAdmin from "./pages/TrangAdmin/TrangAdmin";
 import TrangChiTietCongViec from "./pages/TrangChiTietCongViec/TrangChiTietCongViec";
 import TrangChiTietThongTinCaNhan from "./pages/TrangChiTietThongTinCaNhan/TrangChiTietThongTinCaNhan";
@@ -14,7 +17,7 @@ import TrangLoading from "./pages/TrangLoading/TrangLoading";
 function App() {
   return (
     <div className="App">
-      <TrangLoading />
+      {/* <TrangLoading /> */}
       <BrowserRouter>
         <Routes>
           {/* Đây là phần demo thui ^^. Đừng xoá nha
@@ -26,8 +29,8 @@ function App() {
 
           {/* TrangChiTietCongViec */}
           <Route
-            path="/"
-            element={<LayoutFiverr Component={TrangChiTietCongViec} />}
+            path="/chiTietCongViec/:maCongViec"
+            element={<LayoutTrangCongViec Component={TrangChiTietCongViec} />}
           />
 
           {/* TrangChiTietThongTinCaNhan */}
@@ -50,15 +53,17 @@ function App() {
 
           {/* TrangDanhSachCongViec */}
           <Route
-            path="/"
-            element={<LayoutFiverr Component={TrangDanhSachCongViec} />}
+            path="/danhSachCongViec/:tenCongViec"
+            element={<LayoutTrangCongViec Component={TrangDanhSachCongViec} />}
           />
 
           {/* TrangDanhSachCongViecVaLoaiCongViec */}
           <Route
-            path="/"
+            path="/categories/:maLoaiCongViec"
             element={
-              <LayoutFiverr Component={TrangDanhSachCongViecVaLoaiCongViec} />
+              <LayoutTrangCongViec
+                Component={TrangDanhSachCongViecVaLoaiCongViec}
+              />
             }
           />
         </Routes>

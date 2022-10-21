@@ -1,9 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import "antd/dist/antd.css";
-import CategoriesMenu from "./Components/Layout/CategoriesMenu/CategoriesMenu";
-import LayoutFiverr from "./Components/Layout/LayoutFiverr";
-import LayoutTrangCongViec from "./Components/Layout/LayoutTrangCongViec";
+
 import LayoutFiverr from "./components/Layout/LayoutFiverr";
 import TrangAdmin from "./pages/TrangAdmin/TrangAdmin";
 import TrangChiTietCongViec from "./pages/TrangChiTietCongViec/TrangChiTietCongViec";
@@ -14,17 +11,16 @@ import TrangDangNhap from "./pages/TrangDangNhap/TrangDangNhap";
 import TrangDanhSachCongViec from "./pages/TrangDanhSachCongViec/TrangDanhSachCongViec";
 import TrangDanhSachCongViecVaLoaiCongViec from "./pages/TrangDanhSachCongViecVaLoaiCongViec/TrangDanhSachCongViecVaLoaiCongViec";
 import TrangLoading from "./pages/TrangLoading/TrangLoading";
-
+import "antd/dist/antd.css";
+import CategoriesMenu from "./Components/Layout/CategoriesMenu/CategoriesMenu";
+import LayoutFiverr from "./Components/Layout/LayoutFiverr";
+import LayoutTrangCongViec from "./Components/Layout/LayoutTrangCongViec";
 function App() {
   return (
     <div className="App">
       <TrangLoading />
       <BrowserRouter>
         <Routes>
-          {/* Đây là phần demo thui ^^. Đừng xoá nha
-          <Route element={<Layout Component={...}/>} />
-           */}
-
           {/* TrangAdmin */}
           <Route path="/" element={<LayoutFiverr Component={TrangAdmin} />} />
 

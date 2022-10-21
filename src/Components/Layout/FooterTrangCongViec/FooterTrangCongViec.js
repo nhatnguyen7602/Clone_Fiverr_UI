@@ -4,7 +4,8 @@ import "./footerTrangCongViec.css";
 
 export default function FooterTrangCongViec() {
   return (
-    <footer className="p-5 px-28 bg-gray-100 text-gray-800">
+    <footer className="p-5 px-28 text-gray-800">
+      <Divider />
       <div className="container grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-5 text-left">
         <div className="flex flex-col space-y-4">
           <h2 className="font-bold">Categories</h2>

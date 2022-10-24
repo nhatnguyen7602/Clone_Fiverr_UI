@@ -8,10 +8,26 @@ export const userServ = {
     return https.get(uri);
   },
 
+  layNguoiDungTheoId: (id) => {
+    let uri = `/api/users/${id}`;
+
+    return https.get(uri);
+  },
+
   themNguoiDung: (data) =>
     axios({
       url: `${BASE_URL}/api/users`,
       method: "POST",
+      data,
+      headers: {
+        TokenCybersoft: TOKEN_CYBERSOFT,
+      },
+    }),
+
+  capNhatNguoiDung: (data) =>
+    axios({
+      url: `${BASE_URL}/api/users/${data.id}`,
+      method: "PUT",
       data,
       headers: {
         TokenCybersoft: TOKEN_CYBERSOFT,

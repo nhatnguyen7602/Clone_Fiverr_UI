@@ -14,31 +14,36 @@ import {
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { useFormik } from "formik";
 import React, { Fragment, useState } from "react";
-import { Option } from "antd/lib/mentions";
 import moment from "moment/moment";
 import { userServ } from "../../../services/serviceNguoiDung";
+import { useDispatch } from "react-redux";
 
 const children = [];
 
-const TrangThemUser = () => {
+const { Option } = Select;
+
+const TrangSuaUser = ({ infoUser }) => {
+  const dispatch = useDispatch();
+
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      name: "",
-      email: "",
-      password: "",
-      phone: "",
-      birthday: "",
-      gender: false,
-      role: "USER",
-      skill: [],
-      certification: [],
+      id: infoUser.id,
+      name: infoUser.name,
+      email: infoUser.email,
+      phone: infoUser.phone,
+      birthday: infoUser.birthday,
+      gender: infoUser.gender,
+      role: infoUser.role,
+      skill: infoUser.skill,
+      certification: infoUser.certification,
     },
 
     onSubmit: (values) => {
       userServ
-        .themNguoiDung(values)
+        .capNhatNguoiDung(values)
         .then(() => {
-          message.success("Thêm người dùng thành công!");
+          message.success("Cập nhật thông tin thành công!");
         })
         .catch((err) => {
           message.error(err.response?.data);
@@ -66,7 +71,7 @@ const TrangThemUser = () => {
 
   return (
     <Fragment>
-      <h3 className="text-2xl text-center mb-7">Thêm người dùng</h3>
+      <h3 className="text-2xl text-center mb-7">Sửa thông tin người dùng</h3>
 
       <Form
         onSubmitCapture={formik.handleSubmit}
@@ -80,20 +85,18 @@ const TrangThemUser = () => {
         layout="horizontal"
       >
         <Form.Item label="Họ tên">
-          <Input name="name" onChange={formik.handleChange} />
+          <Input
+            name="name"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+          />
         </Form.Item>
 
         <Form.Item label="Email">
-          <Input name="email" onChange={formik.handleChange} />
-        </Form.Item>
-
-        <Form.Item label="Mật khẩu">
-          <Input.Password
-            name="password"
+          <Input
+            name="email"
+            value={formik.values.email}
             onChange={formik.handleChange}
-            iconRender={(visible) =>
-              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-            }
           />
         </Form.Item>
 
@@ -102,6 +105,7 @@ const TrangThemUser = () => {
             type="number"
             controls={false}
             style={{ width: "100%" }}
+            value={formik.values.phone}
             onChange={handleChangeValue("phone")}
           />
         </Form.Item>
@@ -110,14 +114,14 @@ const TrangThemUser = () => {
           <DatePicker
             format={"DD/MM/YYYY"}
             className="w-full"
-            placeholder="01/12/2022"
+            value={moment(formik.values.birthday, "DD/MM/YYYY")}
             onChange={handleChangeDate("birthday")}
           />
         </Form.Item>
 
         <Form.Item label="Giới tính">
           <Select
-            defaultValue="nu"
+            value={formik.values.gender ? "nam" : "nu"}
             className="w-full"
             onChange={handleChangeGender("gender")}
           >
@@ -128,8 +132,8 @@ const TrangThemUser = () => {
 
         <Form.Item label="Loại quyền">
           <Select
-            defaultValue="USER"
             className="w-full"
+            value={formik.values.role}
             onChange={handleChangeValue("role")}
           >
             <Option value="USER">Khách hàng</Option>
@@ -141,7 +145,7 @@ const TrangThemUser = () => {
           <Select
             mode="tags"
             className="w-full"
-            placeholder="HTML, CSS, ..."
+            value={formik.values.skill}
             onChange={handleChangeValue("skill")}
           >
             {children}
@@ -152,20 +156,23 @@ const TrangThemUser = () => {
           <Select
             mode="tags"
             className="w-full"
-            placeholder="CyberSoft, ..."
+            value={formik.values.certification}
             onChange={handleChangeValue("certification")}
           >
             {children}
           </Select>
         </Form.Item>
 
-        <Form.Item className="flex justify-center" style={{ marginBottom: 0 }}>
+        <Form.Item
+          className="flex justify-center items-center"
+          style={{ marginBottom: 0 }}
+        >
           <button
             type="submit"
             className="text-white px-4 py-2 rounded"
-            style={{ backgroundColor: "#1d3557" }}
+            style={{ backgroundColor: "#457b9d" }}
           >
-            Thêm
+            Sửa
           </button>
         </Form.Item>
       </Form>
@@ -173,4 +180,4 @@ const TrangThemUser = () => {
   );
 };
 
-export default TrangThemUser;
+export default TrangSuaUser;

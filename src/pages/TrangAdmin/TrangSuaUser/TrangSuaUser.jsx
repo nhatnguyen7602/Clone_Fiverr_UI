@@ -169,10 +169,10 @@ const TrangSuaUser = ({ infoUser }) => {
         >
           <button
             type="submit"
-            className="text-white px-4 py-2 rounded"
+            className="text-white px-4 py-2 rounded w-max"
             style={{ backgroundColor: "#457b9d" }}
           >
-            Sửa
+            Cập nhật
           </button>
         </Form.Item>
       </Form>

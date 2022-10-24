@@ -110,14 +110,14 @@ const TrangThemUser = () => {
           <DatePicker
             format={"DD/MM/YYYY"}
             className="w-full"
-            placeholder="01/12/2022"
+            placeholder="Chọn ngày sinh"
             onChange={handleChangeDate("birthday")}
           />
         </Form.Item>
 
         <Form.Item label="Giới tính">
           <Select
-            defaultValue="nu"
+            placeholder="Chọn giới tính"
             className="w-full"
             onChange={handleChangeGender("gender")}
           >
@@ -128,7 +128,7 @@ const TrangThemUser = () => {
 
         <Form.Item label="Loại quyền">
           <Select
-            defaultValue="USER"
+            placeholder="Chọn loại quyền"
             className="w-full"
             onChange={handleChangeValue("role")}
           >
@@ -141,7 +141,7 @@ const TrangThemUser = () => {
           <Select
             mode="tags"
             className="w-full"
-            placeholder="HTML, CSS, ..."
+            placeholder="VD: HTML, CSS, ..."
             onChange={handleChangeValue("skill")}
           >
             {children}
@@ -152,7 +152,7 @@ const TrangThemUser = () => {
           <Select
             mode="tags"
             className="w-full"
-            placeholder="CyberSoft, ..."
+            placeholder="VD: CyberSoft, ..."
             onChange={handleChangeValue("certification")}
           >
             {children}

@@ -33,4 +33,10 @@ export const userServ = {
         TokenCybersoft: TOKEN_CYBERSOFT,
       },
     }),
+
+  xoaNguoiDung: (id) => {
+    let uri = `/api/users?id=${id}`;
+
+    return https.delete(uri);
+  },
 };

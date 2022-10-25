@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import "antd/dist/antd.css";
 import "./assets/styleAdmin.css";
-import LayoutFiverr from "./components/Layout/LayoutFiverr";
+import LayoutFiverr from "./Components/Layout/LayoutFiverr";
 import TrangAdmin from "./pages/TrangAdmin/TrangAdmin";
 import TrangChiTietCongViec from "./pages/TrangChiTietCongViec/TrangChiTietCongViec";
 import TrangChiTietThongTinCaNhan from "./pages/TrangChiTietThongTinCaNhan/TrangChiTietThongTinCaNhan";

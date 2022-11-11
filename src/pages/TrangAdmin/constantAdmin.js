@@ -1,2 +1,5 @@
 export const THEM_MODAL = "THEM_MODAL";
 export const SUA_MODAL = "SUA_MODAL";
+
+export const THEM_CONG_VIEC_MODAL = "THEM_CONG_VIEC_MODAL";
+export const SUA_CONG_VIEC_MODAL = "SUA_CONG_VIEC_MODAL";

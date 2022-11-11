@@ -1,19 +1,9 @@
-import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
+import { UserOutlined, AppstoreOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
+import Item from "antd/lib/list/Item";
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 const { Header, Content, Footer, Sider } = Layout;
-
-const items = [
-  {
-    key: "1",
-    icon: <UserOutlined />,
-    label: "Quản lý người dùng",
-  },
-];
 
 const TrangAdmin = ({ Component }) => (
   <Layout className="h-screen">
@@ -28,12 +18,15 @@ const TrangAdmin = ({ Component }) => (
       }}
     >
       <div className="logo" />
-      <Menu
-        theme="dark"
-        mode="inline"
-        defaultSelectedKeys={["1"]}
-        items={items}
-      />
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+        <Menu.Item key="1" icon={<UserOutlined />}>
+          <NavLink to="/admin">Quản lý người dùng</NavLink>
+        </Menu.Item>
+
+        <Menu.Item key="2" icon={<AppstoreOutlined />}>
+          <NavLink to="/admin/job">Quản lý công việc</NavLink>
+        </Menu.Item>
+      </Menu>
     </Sider>
     <Layout>
       <Header className="site-layout-sub-header-background" />

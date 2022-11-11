@@ -1,4 +1,13 @@
-import { Table, Tag, Button, Modal, Popover, Popconfirm, message } from "antd";
+import {
+  Table,
+  Tag,
+  Button,
+  Modal,
+  Popover,
+  Popconfirm,
+  message,
+  Input,
+} from "antd";
 import {
   EditFilled,
   DeleteFilled,
@@ -11,6 +20,8 @@ import TrangThemUser from "../TrangQuanLyUser/TrangThemUser/TrangThemUser";
 import TrangSuaUser from "../TrangQuanLyUser/TrangSuaUser/TrangSuaUser";
 import { useDispatch } from "react-redux";
 import { SUA_MODAL, THEM_MODAL, XOA_MODAL } from "../constantAdmin";
+
+const { Search } = Input;
 
 const TrangQuanLyUser = () => {
   const [dataUser, setDataUser] = useState(null);
@@ -64,6 +75,28 @@ const TrangQuanLyUser = () => {
     setModalOpen(false);
   };
 
+  const onSearch = (value) => {
+    if (value.length > 0) {
+      userServ
+        .searchNguoiDung(value)
+        .then((res) => {
+          setDataUser(res.data.content);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      userServ
+        .layDsNguoiDung()
+        .then((res) => {
+          setDataUser(res.data.content);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
   const columns = [
     {
       title: "Mã số",
@@ -71,6 +104,7 @@ const TrangQuanLyUser = () => {
       key: "id",
       width: "10%",
     },
+
     {
       title: "Họ tên",
       dataIndex: "name",
@@ -84,6 +118,7 @@ const TrangQuanLyUser = () => {
       key: "id",
       width: "35%",
     },
+
     {
       title: "Loại người dùng",
       dataIndex: "role",
@@ -96,6 +131,7 @@ const TrangQuanLyUser = () => {
         ),
       width: "15%",
     },
+
     {
       title: <SettingOutlined className="text-xl" />,
       dataIndex: "id",
@@ -175,6 +211,14 @@ const TrangQuanLyUser = () => {
           </Modal>
         </div>
       </div>
+
+      <Search
+        className="w-full mb-4"
+        size="large"
+        placeholder="Nhập tên người dùng"
+        onSearch={onSearch}
+      />
+
       <Table columns={columns} dataSource={dataUser} />
     </div>
   );

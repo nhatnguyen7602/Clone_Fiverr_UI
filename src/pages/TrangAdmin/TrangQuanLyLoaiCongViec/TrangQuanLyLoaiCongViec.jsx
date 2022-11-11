@@ -1,4 +1,13 @@
-import { Table, Tag, Button, Modal, Popover, Popconfirm, message } from "antd";
+import {
+  Table,
+  Tag,
+  Button,
+  Modal,
+  Popover,
+  Popconfirm,
+  message,
+  Input,
+} from "antd";
 import {
   EditFilled,
   DeleteFilled,
@@ -19,6 +28,8 @@ import TrangThemCongViec from "../TrangQuanLyCongViec/TrangThemCongViec/TrangThe
 import TrangSuaCongViec from "../TrangQuanLyCongViec/TrangSuaCongViec/TrangSuaCongViec";
 import TrangThemLoaiCongViec from "./TrangThemLoaiCongViec/TrangThemLoaiCongViec";
 import TrangSuaLoaiCongViec from "./TrangSuaLoaiCongViec/TrangSuaLoaiCongViec";
+
+const { Search } = Input;
 
 const TrangQuanLyLoaiCongViec = () => {
   const [dataTypeJob, setDataTypeJob] = useState(null);
@@ -70,6 +81,29 @@ const TrangQuanLyLoaiCongViec = () => {
 
   const handleCancel = () => {
     setModalOpen(false);
+  };
+
+  const onSearch = (value) => {
+    if (value.length > 0) {
+      typeJobServ
+        .searchLoaiCongViec(value)
+        .then((res) => {
+          setDataTypeJob(res.data.content.data);
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      typeJobServ
+        .layDsLoaiCongViec()
+        .then((res) => {
+          setDataTypeJob(res.data.content);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const columns = [
@@ -166,6 +200,14 @@ const TrangQuanLyLoaiCongViec = () => {
           </Modal>
         </div>
       </div>
+
+      <Search
+        className="w-full mb-4"
+        size="large"
+        placeholder="Nhập tên loại công việc"
+        onSearch={onSearch}
+      />
+
       <Table columns={columns} dataSource={dataTypeJob} />
     </div>
   );

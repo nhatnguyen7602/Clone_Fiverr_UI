@@ -11,8 +11,9 @@ import { NavLink } from "react-router-dom";
 const { Header, Content, Footer, Sider } = Layout;
 
 const TrangAdmin = ({ Component }) => (
-  <Layout className="h-screen">
+  <Layout>
     <Sider
+      className="min-h-screen"
       breakpoint="lg"
       collapsedWidth="0"
       onBreakpoint={(broken) => {
@@ -23,7 +24,12 @@ const TrangAdmin = ({ Component }) => (
       }}
     >
       <div className="logo" />
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+      <Menu
+        className="fixed"
+        theme="dark"
+        mode="inline"
+        defaultSelectedKeys={["1"]}
+      >
         <Menu.Item key="1" icon={<UserOutlined />}>
           <NavLink to="/admin">Quản lý người dùng</NavLink>
         </Menu.Item>
@@ -41,10 +47,10 @@ const TrangAdmin = ({ Component }) => (
         </Menu.Item>
       </Menu>
     </Sider>
-    <Layout>
+    <Layout className="z-50">
       <Header className="site-layout-sub-header-background" />
       <Content>
-        <div className="site-layout-background px-4">
+        <div className="site-layout-background px-4 min-h-full">
           <Component />
         </div>
       </Content>

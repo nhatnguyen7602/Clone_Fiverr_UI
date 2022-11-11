@@ -1,4 +1,13 @@
-import { Table, Tag, Button, Modal, Popover, Popconfirm, message } from "antd";
+import {
+  Table,
+  Tag,
+  Button,
+  Modal,
+  Popover,
+  Popconfirm,
+  message,
+  Input,
+} from "antd";
 import {
   EditFilled,
   DeleteFilled,
@@ -22,6 +31,8 @@ import {
 } from "../constantAdmin";
 import { jobServ } from "../../../services/serviceCongViec";
 import { dichVuServ } from "../../../services/serviceThueCongViec";
+
+const { Search } = Input;
 
 const TrangQuanLyDichVu = () => {
   const [dataService, setDataService] = useState(null);
@@ -73,6 +84,28 @@ const TrangQuanLyDichVu = () => {
     setModalOpen(false);
   };
 
+  const onSearch = (value) => {
+    if (value.length > 0) {
+      dichVuServ
+        .layDichVuTheoId(value)
+        .then((res) => {
+          setDataService([res.data.content]);
+        })
+        .catch((err) => {
+          message.error(err.response?.data.message);
+        });
+    } else {
+      dichVuServ
+        .layDsDichVu()
+        .then((res) => {
+          setDataService(res.data.content);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
   const columns = [
     {
       title: "Mã số",
@@ -86,6 +119,13 @@ const TrangQuanLyDichVu = () => {
       dataIndex: "maCongViec",
       key: "id",
       width: "10%",
+    },
+
+    {
+      title: "Mã người thuê",
+      dataIndex: "maNguoiThue",
+      key: "id",
+      width: "20%",
     },
 
     {
@@ -185,6 +225,14 @@ const TrangQuanLyDichVu = () => {
           </Modal>
         </div>
       </div>
+
+      <Search
+        className="w-full mb-4"
+        size="large"
+        placeholder="Nhập tên mã dịch vụ"
+        onSearch={onSearch}
+      />
+
       <Table columns={columns} dataSource={dataService} />
     </div>
   );

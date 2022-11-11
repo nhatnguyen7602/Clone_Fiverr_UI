@@ -1,4 +1,13 @@
-import { Table, Tag, Button, Modal, Popover, Popconfirm, message } from "antd";
+import {
+  Table,
+  Tag,
+  Button,
+  Modal,
+  Popover,
+  Popconfirm,
+  message,
+  Input,
+} from "antd";
 import {
   EditFilled,
   DeleteFilled,
@@ -18,6 +27,8 @@ import {
 } from "../constantAdmin";
 import { jobServ } from "../../../services/serviceCongViec";
 import TrangSuaCongViec from "./TrangSuaCongViec/TrangSuaCongViec";
+
+const { Search } = Input;
 
 const TrangQuanLyCongViec = () => {
   const [dataJob, setDataJob] = useState(null);
@@ -69,6 +80,29 @@ const TrangQuanLyCongViec = () => {
 
   const handleCancel = () => {
     setModalOpen(false);
+  };
+
+  const onSearch = (value) => {
+    if (value.length > 0) {
+      jobServ
+        .searchCongViec(value)
+        .then((res) => {
+          setDataJob(res.data.content.map((congViec) => congViec.congViec));
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      jobServ
+        .layDanhSachCongViec()
+        .then((res) => {
+          setDataJob(res.data.content);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const columns = [
@@ -185,6 +219,14 @@ const TrangQuanLyCongViec = () => {
           </Modal>
         </div>
       </div>
+
+      <Search
+        className="w-full mb-4"
+        size="large"
+        placeholder="Nhập tên công việc"
+        onSearch={onSearch}
+      />
+
       <Table columns={columns} dataSource={dataJob} />
     </div>
   );

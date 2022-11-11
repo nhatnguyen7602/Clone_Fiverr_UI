@@ -48,4 +48,10 @@ export const typeJobServ = {
         TokenCybersoft: TOKEN_CYBERSOFT,
       },
     }),
+
+  searchLoaiCongViec: (keyWord) => {
+    let uri = `api/loai-cong-viec/phan-trang-tim-kiem?pageIndex=1&pageSize=100&keyword=${keyWord}`;
+
+    return https.get(uri);
+  },
 };

@@ -39,4 +39,10 @@ export const userServ = {
 
     return https.delete(uri);
   },
+
+  searchNguoiDung: (tenNguoiDung) => {
+    let uri = `/api/users/search/${tenNguoiDung}`;
+
+    return https.get(uri);
+  },
 };

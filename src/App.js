@@ -14,6 +14,7 @@ import TrangDanhSachCongViecVaLoaiCongViec from "./pages/TrangDanhSachCongViecVa
 import TrangLoading from "./pages/TrangLoading/TrangLoading";
 import TrangQuanLyUser from "./pages/TrangAdmin/TrangQuanLyUser/TrangQuanLyUser";
 import TrangQuanLyCongViec from "./pages/TrangAdmin/TrangQuanLyCongViec/TrangQuanLyCongViec";
+import TrangQuanLyLoaiCongViec from "./pages/TrangAdmin/TrangQuanLyLoaiCongViec/TrangQuanLyLoaiCongViec";
 
 function App() {
   return (
@@ -31,6 +32,11 @@ function App() {
           <Route
             path="/admin/job"
             element={<TrangAdmin Component={TrangQuanLyCongViec} />}
+          />
+
+          <Route
+            path="/admin/typejob"
+            element={<TrangAdmin Component={TrangQuanLyLoaiCongViec} />}
           />
 
           {/* TrangChiTietCongViec */}

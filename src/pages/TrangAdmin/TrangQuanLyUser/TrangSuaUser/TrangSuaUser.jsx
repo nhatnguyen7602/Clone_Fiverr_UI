@@ -15,7 +15,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { useFormik } from "formik";
 import React, { Fragment, useState } from "react";
 import moment from "moment/moment";
-import { userServ } from "../../../services/serviceNguoiDung";
+import { userServ } from "../../../../services/serviceNguoiDung";
 import { useDispatch } from "react-redux";
 
 const children = [];

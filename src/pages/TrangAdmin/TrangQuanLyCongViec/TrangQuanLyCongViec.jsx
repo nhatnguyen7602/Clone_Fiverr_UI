@@ -9,7 +9,6 @@ import {
 import React, { Fragment, useEffect, useState } from "react";
 import { userServ } from "../../../services/serviceNguoiDung";
 import TrangThemCongViec from "./TrangThemCongViec/TrangThemCongViec";
-import TrangSuaUser from "../TrangSuaUser/TrangSuaUser";
 import { useDispatch } from "react-redux";
 import {
   SUA_CONG_VIEC_MODAL,

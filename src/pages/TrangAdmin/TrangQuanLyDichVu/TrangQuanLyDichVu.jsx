@@ -4,31 +4,40 @@ import {
   DeleteFilled,
   UserAddOutlined,
   SettingOutlined,
+  AppstoreAddOutlined,
+  DiffOutlined,
 } from "@ant-design/icons";
 import React, { Fragment, useEffect, useState } from "react";
 import { userServ } from "../../../services/serviceNguoiDung";
-import TrangThemUser from "../TrangQuanLyUser/TrangThemUser/TrangThemUser";
-import TrangSuaUser from "../TrangQuanLyUser/TrangSuaUser/TrangSuaUser";
+import TrangThemDichVu from "../TrangQuanLyDichVu/TrangThemDichVu/TrangThemDichVu";
+import TrangSuaDichVu from "../TrangQuanLyDichVu/TrangSuaDichVu/TrangSuaDichVu";
 import { useDispatch } from "react-redux";
-import { SUA_MODAL, THEM_MODAL, XOA_MODAL } from "../constantAdmin";
+import {
+  SUA_CONG_VIEC_MODAL,
+  SUA_DICH_VU_MODAL,
+  SUA_MODAL,
+  THEM_CONG_VIEC_MODAL,
+  THEM_DICH_VU_MODAL,
+  THEM_MODAL,
+} from "../constantAdmin";
+import { jobServ } from "../../../services/serviceCongViec";
+import { dichVuServ } from "../../../services/serviceThueCongViec";
 
-const TrangQuanLyUser = () => {
-  const [dataUser, setDataUser] = useState(null);
+const TrangQuanLyDichVu = () => {
+  const [dataService, setDataService] = useState(null);
   const [modalOpen, setModalOpen] = useState({ modalName: "", isOpen: false });
-  const [infoUser, setInfoUser] = useState(null);
-
-  const dispatch = useDispatch();
+  const [infoService, setInfoService] = useState(null);
 
   const showModalThem = () => {
-    setModalOpen({ modalName: THEM_MODAL, isOpen: true });
+    setModalOpen({ modalName: THEM_DICH_VU_MODAL, isOpen: true });
   };
 
   const showModalSua = (id) => {
-    userServ
-      .layNguoiDungTheoId(id)
+    dichVuServ
+      .layDichVuTheoId(id)
       .then((res) => {
-        setModalOpen({ modalName: SUA_MODAL, isOpen: true });
-        setInfoUser(res.data.content);
+        setModalOpen({ modalName: SUA_DICH_VU_MODAL, isOpen: true });
+        setInfoService(res.data.content);
       })
       .catch((err) => {
         console.log(err);
@@ -36,20 +45,20 @@ const TrangQuanLyUser = () => {
   };
 
   const setModal = (nameModal) => {
-    if (nameModal === THEM_MODAL) {
-      return <TrangThemUser />;
+    if (nameModal === THEM_DICH_VU_MODAL) {
+      return <TrangThemDichVu />;
     } else {
-      return <TrangSuaUser infoUser={infoUser} />;
+      return <TrangSuaDichVu infoService={infoService} />;
     }
   };
 
   const titleXoa = `Bạn có chắc muốn xoá?`;
 
-  const handleXoaUser = (id) => {
-    userServ
-      .xoaNguoiDung(id)
+  const handleXoaDichVu = (id) => {
+    dichVuServ
+      .xoaDichVu(id)
       .then(() => {
-        message.success("Xoá người dùng thành công!");
+        message.success("Xoá dịch vụ thành công!");
       })
       .catch((err) => {
         message.error(err.response?.data);
@@ -71,30 +80,31 @@ const TrangQuanLyUser = () => {
       key: "id",
       width: "10%",
     },
+
     {
-      title: "Họ tên",
-      dataIndex: "name",
+      title: "Mã công việc",
+      dataIndex: "maCongViec",
       key: "id",
-      width: "20%",
+      width: "10%",
     },
 
     {
-      title: "Email",
-      dataIndex: "email",
+      title: "Ngày thuê",
+      dataIndex: "ngayThue",
       key: "id",
-      width: "35%",
+      width: "30%",
     },
     {
-      title: "Loại người dùng",
-      dataIndex: "role",
+      title: "Trạng thái",
+      dataIndex: "hoanThanh",
       key: "id",
-      render: (role) =>
-        role === "ADMIN" ? (
-          <Tag color="#e63946">Quản trị viên</Tag>
+      render: (hoanThanh) =>
+        hoanThanh ? (
+          <Tag color="#457b9d">Đã hoàn thành</Tag>
         ) : (
-          <Tag color="#457b9d">Khách hàng</Tag>
+          <Tag color="#e63946">Chưa hoàn thành</Tag>
         ),
-      width: "15%",
+      width: "10%",
     },
     {
       title: <SettingOutlined className="text-xl" />,
@@ -117,7 +127,7 @@ const TrangQuanLyUser = () => {
             placement="top"
             title={titleXoa}
             onConfirm={() => {
-              handleXoaUser(id);
+              handleXoaDichVu(id);
             }}
             okText="Xoá"
             cancelText="Huỷ"
@@ -134,10 +144,10 @@ const TrangQuanLyUser = () => {
   ];
 
   useEffect(() => {
-    userServ
-      .layDsNguoiDung()
+    dichVuServ
+      .layDsDichVu()
       .then((res) => {
-        setDataUser(res.data.content);
+        setDataService(res.data.content);
       })
       .catch((err) => {
         console.log(err);
@@ -148,13 +158,13 @@ const TrangQuanLyUser = () => {
     <div>
       <div className="flex items-center justify-between h-20">
         <span className="text-4xl text-left leading-none">
-          Quản lý người dùng
+          Quản lý công việc
         </span>
 
         <div className="text-right">
-          <Popover placement="left" content="Thêm người dùng">
+          <Popover placement="left" content="Thêm dịch vụ">
             <Button
-              icon={<UserAddOutlined />}
+              icon={<DiffOutlined />}
               size="large"
               style={{
                 backgroundColor: "#1d3557",
@@ -175,8 +185,8 @@ const TrangQuanLyUser = () => {
           </Modal>
         </div>
       </div>
-      <Table columns={columns} dataSource={dataUser} />
+      <Table columns={columns} dataSource={dataService} />
     </div>
   );
 };
-export default TrangQuanLyUser;
+export default TrangQuanLyDichVu;

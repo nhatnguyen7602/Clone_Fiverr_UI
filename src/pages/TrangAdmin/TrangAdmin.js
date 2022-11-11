@@ -2,6 +2,7 @@ import {
   UserOutlined,
   AppstoreOutlined,
   FolderOutlined,
+  SnippetsOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import Item from "antd/lib/list/Item";
@@ -33,6 +34,10 @@ const TrangAdmin = ({ Component }) => (
 
         <Menu.Item key="3" icon={<FolderOutlined />}>
           <NavLink to="/admin/typejob">Quản lý loại công việc</NavLink>
+        </Menu.Item>
+
+        <Menu.Item key="4" icon={<SnippetsOutlined />}>
+          <NavLink to="/admin/service">Quản lý dịch vụ</NavLink>
         </Menu.Item>
       </Menu>
     </Sider>

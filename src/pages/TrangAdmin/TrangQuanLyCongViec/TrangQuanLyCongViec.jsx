@@ -54,10 +54,10 @@ const TrangQuanLyCongViec = () => {
   const titleXoa = `Bạn có chắc muốn xoá?`;
 
   const handleXoaUser = (id) => {
-    userServ
-      .xoaNguoiDung(id)
+    jobServ
+      .xoaCongViec(id)
       .then(() => {
-        message.success("Xoá người dùng thành công!");
+        message.success("Xoá công việc thành công!");
       })
       .catch((err) => {
         message.error(err.response?.data);

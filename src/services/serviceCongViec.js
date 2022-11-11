@@ -39,6 +39,16 @@ export const jobServ = {
       },
     }),
 
+  xoaCongViec: (id) =>
+    axios({
+      url: `${BASE_URL}/api/cong-viec/${id}`,
+      method: "DELETE",
+      headers: {
+        token: MY_TOKEN,
+        TokenCybersoft: TOKEN_CYBERSOFT,
+      },
+    }),
+
   layDanhSachLoaiCongViec: () => {
     let uri = "/api/cong-viec/lay-menu-loai-cong-viec";
 

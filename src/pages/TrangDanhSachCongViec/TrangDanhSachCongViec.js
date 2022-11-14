@@ -47,10 +47,11 @@ export default function TrangDanhSachCongViec(props) {
   };
 
   return (
-    <div className="trangCongViec py-5 px-28">
+    <div className="trangDanhSachCongViec py-5 px-28">
       <Divider orientation="left" orientationMargin="0">
         <span className="text-2xl font-bold">Result for "{tenCongViec}"</span>
       </Divider>
+
       <Pagination
         defaultCurrent={1}
         total={

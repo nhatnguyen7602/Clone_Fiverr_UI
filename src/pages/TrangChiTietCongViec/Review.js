@@ -123,7 +123,7 @@ export default function Review({ maCongViec }) {
             datetime: item.ngayBinhLuan,
           };
         });
-        console.log("ordersData: ", ordersData);
+        // console.log("ordersData: ", ordersData);
         setComments(ordersData);
         // setComments([
         //   ...comments,

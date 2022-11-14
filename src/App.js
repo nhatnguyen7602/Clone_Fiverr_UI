@@ -13,6 +13,7 @@ import TrangDangNhap from "./pages/TrangDangNhap/TrangDangNhap";
 import TrangDanhSachCongViec from "./pages/TrangDanhSachCongViec/TrangDanhSachCongViec";
 import TrangDanhSachCongViecVaLoaiCongViec from "./pages/TrangDanhSachCongViecVaLoaiCongViec/TrangDanhSachCongViecVaLoaiCongViec";
 import TrangLoading from "./pages/TrangLoading/TrangLoading";
+import TrangError from "./pages/TrangError/TrangError";
 
 function App() {
   return (
@@ -62,6 +63,9 @@ function App() {
               />
             }
           />
+
+          {/* Trang Error  */}
+          <Route path="*" element={<TrangError />} />
         </Routes>
       </BrowserRouter>
     </div>

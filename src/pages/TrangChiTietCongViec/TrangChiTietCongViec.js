@@ -51,9 +51,11 @@ export default function TrangChiTietCongViec() {
   } = congViecContent;
 
   let renderBreadcrumb = () => {
+    console.log("maChiTietLoaiCongViec: ", maChiTietLoaiCongViec);
+
     return (
       <Breadcrumb separator=">">
-        <Breadcrumb.Item href="">
+        <Breadcrumb.Item href={`/categories/${maChiTietLoaiCongViec}`}>
           <span className="font-semibold text-base text-blue-500">
             {tenLoaiCongViec}
           </span>

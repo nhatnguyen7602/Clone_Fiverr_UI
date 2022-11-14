@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useRef } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./HeaderTrangCongViec.css";
 
 export default function HeaderTrangCongViec() {
+  let navigate = useNavigate();
+  let inputSearch = useRef(null);
+
+  // let [userLogin, setUserLogin] = useState({ userName: "" });
+
+  const handelSearch = () => {
+    // console.log("userName", userName.current);
+    // console.log("userLogin", userLogin.userName);
+    // userName.current = "abc";
+    // setUserLogin({
+    // userName: userName.current,
+    // });
+    // console.log("inputSearch: ", inputSearch.current.value);
+    navigate(`/danhSachCongViec/${inputSearch.current.value}`);
+    // <NavLink to={`/danhSachCongViec/${inputSearch.current.value}`} />;
+    // navigate("/");
+  };
   return (
     <>
       <header className="headerTrangCongViec py-4 px-20 text-gray-800 font-semibold text-base">
         <div className="container flex justify-between items-center h-16 mx-auto">
-          <a
-            rel="noopener noreferrer"
-            href="#"
-            aria-label="Back to homepage"
-            className="flex items-center p-2"
-          >
+          <NavLink to={`/`} className="flex items-center p-2">
             <svg
               width="89"
               height="27"
@@ -26,16 +39,24 @@ export default function HeaderTrangCongViec() {
                 <path d="m85.3 27c2 0 3.7-1.7 3.7-3.7s-1.7-3.7-3.7-3.7-3.7 1.7-3.7 3.7 1.7 3.7 3.7 3.7z"></path>
               </g>
             </svg>
-          </a>
+          </NavLink>
           <form className="flex-1">
             <div className="pseudo-search flex justify-between">
               <input
                 type="text"
                 placeholder="What service are you looking for today?"
                 required
+                name="search"
                 className="flex-1"
+                ref={inputSearch}
               />
-              <button className="fa fa-search" type="submit" />
+              <button
+                className="fa fa-search"
+                type="submit"
+                onClick={() => {
+                  handelSearch();
+                }}
+              />
             </div>
           </form>
 

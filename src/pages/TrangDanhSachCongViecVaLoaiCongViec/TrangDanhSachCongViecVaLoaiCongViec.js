@@ -6,27 +6,32 @@ import { dataBackGround } from "./dataBackGround";
 import { dataServiceRelated } from "./dataServiceRelated";
 import { PlayCircleFilled } from "@ant-design/icons";
 import CardLoaiCongViec from "../../Components/CardLoaiCongViec/CardLoaiCongViec";
+import {
+  setLoadingOffAction,
+  setLoadingOnAction,
+} from "../../redux/actions/actionTrangLoading";
+import { useDispatch } from "react-redux";
 
 export default function TrangDanhSachCongViecVaLoaiCongViec() {
+  let dispatch = useDispatch();
   let { maLoaiCongViec } = useParams();
 
   const [loaiCongViec, setLoaiCongViec] = useState({});
   const [dsNhomChiTietLoai, setDsNhomChiTietLoai] = useState([]);
 
   useEffect(() => {
-    // dispatch(setLoadingOnAction());
+    dispatch(setLoadingOnAction());
     serviceCongViec
       .layChiTietLoaiCongViec(maLoaiCongViec)
       .then((res) => {
         let result = res.data.content;
         setLoaiCongViec(result[0]);
         setDsNhomChiTietLoai(result[0].dsNhomChiTietLoai);
-
-        // dispatch(setLoadingOffAction());
+        dispatch(setLoadingOffAction());
       })
       .catch((err) => {
         console.log(err);
-        // dispatch(setLoadingOffAction());
+        dispatch(setLoadingOffAction());
       });
   }, []);
 

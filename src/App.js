@@ -45,6 +45,11 @@ function App() {
             element={<TrangAdmin Component={TrangQuanLyDichVu} />}
           />
 
+          <Route
+            path="/trangchitietthongtincanhan"
+            element={<LayoutFiverr Component={TrangChiTietThongTinCaNhan} />}
+          />
+
           {/* TrangChiTietCongViec */}
           <Route
             path="/"

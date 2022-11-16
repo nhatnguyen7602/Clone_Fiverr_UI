@@ -56,7 +56,7 @@ export default function CarouselService() {
     <div className="caourselService">
       <h1 className="text-left text-5xl">Popular professional services</h1>
       <Slider {...settings}>
-        {dataDigitalBestSeller.map((item) => (
+        {dataCarouselHomePage.map((item) => (
           <div className="card">
             <div className="card-top">
               <img

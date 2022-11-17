@@ -22,7 +22,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* TrangAdmin */}
-          <Route path="/" element={<LayoutFiverr Component={TrangAdmin} />} />
+          <Route
+            path="/admin"
+            element={<LayoutFiverr Component={TrangAdmin} />}
+          />
 
           {/* TrangChiTietCongViec */}
           <Route
@@ -32,21 +35,18 @@ function App() {
 
           {/* TrangChiTietThongTinCaNhan */}
           <Route
-            path="/"
+            path="/trangThongTinCaNhan"
             element={<LayoutFiverr Component={TrangChiTietThongTinCaNhan} />}
           />
 
           {/* TrangChu */}
-          <Route path="/" element={<LayoutFiverr Component={TrangChu} />} />
+          <Route path="/" element={<TrangChu />} />
 
           {/* TrangDangKy */}
-          <Route path="/" element={<LayoutFiverr Component={TrangDangKy} />} />
+          <Route path="/trangDangKy" element={<TrangDangKy />} />
 
           {/* TrangDangNhap */}
-          <Route
-            path="/"
-            element={<LayoutFiverr Component={TrangDangNhap} />}
-          />
+          <Route path="/trangDangNhap" element={<TrangDangNhap />} />
 
           {/* TrangDanhSachCongViec */}
           <Route
@@ -56,7 +56,7 @@ function App() {
 
           {/* TrangDanhSachCongViecVaLoaiCongViec */}
           <Route
-            path="/categories/:maLoaiCongViec"
+            path="/trangDanhSachCongViecVaLoaiCongViec/:maLoaiCongViec"
             element={
               <LayoutTrangCongViec
                 Component={TrangDanhSachCongViecVaLoaiCongViec}

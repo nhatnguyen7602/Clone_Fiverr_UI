@@ -159,7 +159,23 @@ export default function Review({ maCongViec }) {
           datetime: moment().format("DD/MM/YYYY"),
         },
       ]);
-    }, 1000);
+      let data = {
+        id: 303236,
+        maCongViec: 1,
+        maNguoiBinhLuan: 1468,
+        ngayBinhLuan: "5/11/2022",
+        noiDung: "duong1",
+        saoBinhLuan: 5,
+      };
+      serviceBinhLuan
+        .binhLuan(data)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, 500);
   };
 
   const handleChange = (e) => {

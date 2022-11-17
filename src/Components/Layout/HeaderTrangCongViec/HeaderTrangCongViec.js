@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import "./HeaderTrangCongViec.css";
+import "./headerTrangCongViec.css";
 
 export default function HeaderTrangCongViec() {
   let navigate = useNavigate();

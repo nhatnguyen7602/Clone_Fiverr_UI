@@ -31,7 +31,7 @@ export default function TrangDangKy() {
   let onSuccess = () => {
     message.success("Đăng ký thành công");
     setTimeout(() => {
-      navigate("/trangDangNhap");
+      navigate("/");
 
       // history.back();""
     }, 1000);
@@ -59,7 +59,7 @@ export default function TrangDangKy() {
                 type="text"
                 name="name"
                 id="name"
-                placeholder="duongcute"
+                placeholder="Xuan Duong"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
               />
             </div>

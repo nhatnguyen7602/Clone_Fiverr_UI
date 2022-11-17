@@ -1,25 +1,66 @@
 import React, { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
+import { dangXuatAction } from "../../../redux/actions/actionQuanLyNguoiDung";
+import { serviceLocalStorage } from "../../../services/serviceLocalStorage";
 import "./trangChuHeader.css";
 
 export default function TrangChuHeader() {
   let navigate = useNavigate();
-  let inputSearch = useRef(null);
+  let dispatch = useDispatch();
 
-  // let [userLogin, setUserLogin] = useState({ userName: "" });
+  let inputSearch = useRef(null);
+  let { userInfor } = useSelector((state) => state.reducerQuanLyNguoiDung);
 
   const handelSearch = () => {
-    // console.log("userName", userName.current);
-    // console.log("userLogin", userLogin.userName);
-    // userName.current = "abc";
-    // setUserLogin({
-    // userName: userName.current,
-    // });
-    // console.log("inputSearch: ", inputSearch.current.value);
     navigate(`/danhSachCongViec/${inputSearch.current.value}`);
-    // <NavLink to={`/danhSachCongViec/${inputSearch.current.value}`} />;
-    // navigate("/");
   };
+
+  let handleLogOut = () => {
+    serviceLocalStorage.user.remove();
+    dispatch(dangXuatAction());
+    window.location.href = "/trangDangNhap";
+  };
+
+  let renderUserNav = () => {
+    if (!userInfor) {
+      return (
+        <>
+          <NavLink to={`/trangDangNhap`}>
+            <button className="self-center px-8 py-3 rounded text-white hover:text-[#48d048]">
+              Sign in
+            </button>
+          </NavLink>
+          <NavLink to={`/trangDangKy`}>
+            <button className="self-center px-8 py-1 font-semibold rounded border-2 border-green-500 text-white hover:bg-green-500 duration-500">
+              Join
+            </button>
+          </NavLink>
+        </>
+      );
+    } else {
+      console.log("userInfor: ", userInfor);
+
+      return (
+        <>
+          <button
+            onClick={() => {
+              handleLogOut();
+            }}
+            className="self-center px-8 py-3 rounded text-white hover:text-[#48d048]"
+          >
+            Logout
+          </button>
+          <NavLink to={`/trangThongTinCaNhan`}>
+            <button className="self-center px-3 py-1 font-semibold rounded border-2 border-green-500 text-white hover:bg-green-500 duration-500">
+              {`${userInfor.user.name.slice(0, 8)}...`}
+            </button>
+          </NavLink>
+        </>
+      );
+    }
+  };
+
   return (
     <header className="tranChuHeader py-4 px-20 text-white font-semibold text-base">
       <div className="container flex justify-between items-center h-16 mx-auto">
@@ -108,16 +149,7 @@ export default function TrangChuHeader() {
             </li>
           </ul>
           <div className="items-center flex-shrink-0 hidden lg:flex">
-            <NavLink to={`/trangDangNhap`}>
-              <button className="self-center px-8 py-3 rounded text-white hover:text-[#48d048]">
-                Sign in
-              </button>
-            </NavLink>
-            <NavLink to={`/trangDangKy`}>
-              <button className="self-center px-8 py-1 font-semibold rounded border-2 border-green-500 text-white hover:bg-green-500 duration-500">
-                Join
-              </button>
-            </NavLink>
+            {renderUserNav()}
           </div>
         </div>
 

@@ -112,7 +112,7 @@ export default function HeaderTrangCongViec() {
               <button className="self-center px-8 py-3 rounded hover:text-[#48d048]">
                 Sign in
               </button>
-              <button className="self-center px-8 py-3 font-semibold rounded border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white duration-500">
+              <button className="self-center px-8 py-1 font-semibold rounded border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white duration-500">
                 Join
               </button>
             </div>

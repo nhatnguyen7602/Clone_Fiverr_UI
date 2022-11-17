@@ -11,7 +11,7 @@ export default function TrangDangKy() {
 
   const formik = useFormik({
     initialValues: {
-      id: new Date().getTime(),
+      id: "",
       name: "",
       email: "",
       password: "",

@@ -3,6 +3,9 @@ import "./App.css";
 import "antd/dist/antd.css";
 import "./assets/styleAdmin.css";
 import LayoutFiverr from "./Components/Layout/LayoutFiverr";
+import CategoriesMenu from "./Components/Layout/CategoriesMenu/CategoriesMenu";
+import LayoutFiverr from "./Components/Layout/LayoutFiverr";
+import LayoutTrangCongViec from "./Components/Layout/LayoutTrangCongViec";
 import TrangAdmin from "./pages/TrangAdmin/TrangAdmin";
 import TrangChiTietCongViec from "./pages/TrangChiTietCongViec/TrangChiTietCongViec";
 import TrangChiTietThongTinCaNhan from "./pages/TrangChiTietThongTinCaNhan/TrangChiTietThongTinCaNhan";
@@ -16,6 +19,7 @@ import TrangQuanLyUser from "./pages/TrangAdmin/TrangQuanLyUser/TrangQuanLyUser"
 import TrangQuanLyCongViec from "./pages/TrangAdmin/TrangQuanLyCongViec/TrangQuanLyCongViec";
 import TrangQuanLyLoaiCongViec from "./pages/TrangAdmin/TrangQuanLyLoaiCongViec/TrangQuanLyLoaiCongViec";
 import TrangQuanLyDichVu from "./pages/TrangAdmin/TrangQuanLyDichVu/TrangQuanLyDichVu";
+import TrangError from "./pages/TrangError/TrangError";
 
 function App() {
   return (
@@ -23,70 +27,44 @@ function App() {
       <TrangLoading />
       <BrowserRouter>
         <Routes>
-          {/* TrangAdmin */}
-          {/* <Route path="/" element={<LayoutFiverr Component={TrangAdmin} />} /> */}
           <Route
-            path="/admin"
-            element={<TrangAdmin Component={TrangQuanLyUser} />}
-          />
-
-          <Route
-            path="/admin/job"
-            element={<TrangAdmin Component={TrangQuanLyCongViec} />}
-          />
-
-          <Route
-            path="/admin/typejob"
-            element={<TrangAdmin Component={TrangQuanLyLoaiCongViec} />}
-          />
-
-          <Route
-            path="/admin/service"
-            element={<TrangAdmin Component={TrangQuanLyDichVu} />}
-          />
-
-          <Route
-            path="/trangchitietthongtincanhan"
-            element={<LayoutFiverr Component={TrangChiTietThongTinCaNhan} />}
-          />
-
-          {/* TrangChiTietCongViec */}
-          <Route
-            path="/"
-            element={<LayoutFiverr Component={TrangChiTietCongViec} />}
+            path="/chiTietCongViec/:maCongViec"
+            element={<LayoutTrangCongViec Component={TrangChiTietCongViec} />}
           />
 
           {/* TrangChiTietThongTinCaNhan */}
           <Route
-            path="/"
+            path="/trangThongTinCaNhan"
             element={<LayoutFiverr Component={TrangChiTietThongTinCaNhan} />}
           />
 
           {/* TrangChu */}
-          <Route path="/" element={<LayoutFiverr Component={TrangChu} />} />
+          <Route path="/" element={<TrangChu />} />
 
           {/* TrangDangKy */}
-          <Route path="/" element={<LayoutFiverr Component={TrangDangKy} />} />
+          <Route path="/trangDangKy" element={<TrangDangKy />} />
 
           {/* TrangDangNhap */}
-          <Route
-            path="/"
-            element={<LayoutFiverr Component={TrangDangNhap} />}
-          />
+          <Route path="/trangDangNhap" element={<TrangDangNhap />} />
 
           {/* TrangDanhSachCongViec */}
           <Route
-            path="/"
-            element={<LayoutFiverr Component={TrangDanhSachCongViec} />}
+            path="/danhSachCongViec/:tenCongViec"
+            element={<LayoutTrangCongViec Component={TrangDanhSachCongViec} />}
           />
 
           {/* TrangDanhSachCongViecVaLoaiCongViec */}
           <Route
-            path="/"
+            path="/trangDanhSachCongViecVaLoaiCongViec/:maLoaiCongViec"
             element={
-              <LayoutFiverr Component={TrangDanhSachCongViecVaLoaiCongViec} />
+              <LayoutTrangCongViec
+                Component={TrangDanhSachCongViecVaLoaiCongViec}
+              />
             }
           />
+
+          {/* Trang Error  */}
+          <Route path="*" element={<TrangError />} />
         </Routes>
       </BrowserRouter>
     </div>

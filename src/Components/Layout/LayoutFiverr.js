@@ -8,7 +8,7 @@ export default function LayoutFiverr(props) {
     <div className="h-screen">
       <HeaderFiverr />
       <div>{<Component />}</div>
-      <FooterFiverr />
+      {/* <FooterFiverr /> */}
     </div>
   );
 }

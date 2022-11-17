@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { serviceNguoiDung } from "../../services/serviceNguoiDung";
@@ -7,11 +6,9 @@ import { message } from "antd";
 
 export default function TrangDangKy() {
   let navigate = useNavigate();
-  let dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
-      id: "",
       name: "",
       email: "",
       password: "",

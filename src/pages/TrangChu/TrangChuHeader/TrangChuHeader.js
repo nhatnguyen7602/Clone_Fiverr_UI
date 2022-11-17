@@ -108,12 +108,16 @@ export default function TrangChuHeader() {
             </li>
           </ul>
           <div className="items-center flex-shrink-0 hidden lg:flex">
-            <button className="self-center px-8 py-3 rounded hover:text-[#48d048]">
-              Sign in
-            </button>
-            <button className="self-center px-8 py-1 font-semibold rounded border-2 border-green-500 text-white hover:bg-green-500 duration-500">
-              Join
-            </button>
+            <NavLink to={`/trangDangNhap`}>
+              <button className="self-center px-8 py-3 rounded text-white hover:text-[#48d048]">
+                Sign in
+              </button>
+            </NavLink>
+            <NavLink to={`/trangDangKy`}>
+              <button className="self-center px-8 py-1 font-semibold rounded border-2 border-green-500 text-white hover:bg-green-500 duration-500">
+                Join
+              </button>
+            </NavLink>
           </div>
         </div>
 

@@ -2,6 +2,12 @@ import { Comment, List, Rate, Avatar, Form, Input } from "antd";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { serviceBinhLuan } from "../../services/serviceBinhLuan";
+import { serviceLocalStorage } from "../../services/serviceLocalStorage";
+import {
+  setLoadingOffAction,
+  setLoadingOnAction,
+} from "../../redux/actions/actionTrangLoading";
+import { useDispatch } from "react-redux";
 const { TextArea } = Input;
 
 //form comment
@@ -39,6 +45,8 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 );
 
 export default function Review({ maCongViec }) {
+  let dispatch = useDispatch();
+
   let renderRate = () => {
     return (
       <div className="flex flex-col max-w-xl bg-transparent text-gray-800 mx-auto py-14">
@@ -116,9 +124,14 @@ export default function Review({ maCongViec }) {
         // });
 
         let ordersData = result.map((item) => {
+          console.log("item: ", item);
+          let avatar;
+          item.avatar
+            ? (avatar = item.avatar)
+            : (avatar = "https://joeschmoe.io/api/v1/random");
           return {
             author: item.tenNguoiBinhLuan,
-            avatar: item.avatar,
+            avatar: avatar,
             content: <p>{item.noiDung}</p>,
             datetime: item.ngayBinhLuan,
           };
@@ -153,27 +166,30 @@ export default function Review({ maCongViec }) {
       setComments([
         ...comments,
         {
-          author: "Han Solo",
+          author: serviceLocalStorage.user.get()?.user.name,
           avatar: "https://joeschmoe.io/api/v1/random",
           content: <p>{value}</p>,
           datetime: moment().format("DD/MM/YYYY"),
         },
       ]);
       let data = {
-        id: 303236,
-        maCongViec: 1,
-        maNguoiBinhLuan: 1468,
-        ngayBinhLuan: "5/11/2022",
-        noiDung: "duong1",
+        maCongViec: maCongViec,
+        maNguoiBinhLuan: serviceLocalStorage.user.get()?.user.id,
+        ngayBinhLuan: moment().format("DD/MM/YYYY"),
+        noiDung: value,
         saoBinhLuan: 5,
       };
+
+      dispatch(setLoadingOnAction());
       serviceBinhLuan
         .binhLuan(data)
         .then((res) => {
           console.log(res);
+          dispatch(setLoadingOffAction());
         })
         .catch((err) => {
           console.log(err);
+          dispatch(setLoadingOffAction());
         });
     }, 500);
   };

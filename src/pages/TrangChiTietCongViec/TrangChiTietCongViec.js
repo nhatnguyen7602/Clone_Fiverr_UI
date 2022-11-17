@@ -1,6 +1,11 @@
 import { Breadcrumb, Collapse, Divider, Rate } from "antd";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import {
+  setLoadingOffAction,
+  setLoadingOnAction,
+} from "../../redux/actions/actionTrangLoading";
 import { serviceCongViec } from "../../services/serviceCongViec";
 import BangGia from "./BangGia";
 import Review from "./Review";
@@ -9,25 +14,25 @@ import "./trangChiTietCongviec.css";
 const { Panel } = Collapse;
 
 export default function TrangChiTietCongViec() {
+  let dispatch = useDispatch();
   let { maCongViec } = useParams();
 
   const [congViecMoTa, setCongViecMota] = useState({});
   const [congViecContent, setCongViecContent] = useState([]);
 
   useEffect(() => {
-    // dispatch(setLoadingOnAction());
+    dispatch(setLoadingOnAction());
     serviceCongViec
       .layCongViecChiTiet(maCongViec)
       .then((res) => {
         let result = res.data.content;
         setCongViecMota(result[0]);
         setCongViecContent(result[0].congViec);
-
-        // dispatch(setLoadingOffAction());
+        dispatch(setLoadingOffAction());
       })
       .catch((err) => {
         console.log(err);
-        // dispatch(setLoadingOffAction());
+        dispatch(setLoadingOffAction());
       });
   }, []);
 

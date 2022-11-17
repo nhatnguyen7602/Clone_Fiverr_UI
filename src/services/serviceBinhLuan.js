@@ -5,4 +5,14 @@ export const serviceBinhLuan = {
     let uri = `/api/binh-luan/lay-binh-luan-theo-cong-viec/${maCongViec}`;
     return https.get(uri);
   },
+  binhLuan: (data) => {
+    let uri = `/api/binh-luan`;
+    return https.post(uri, data, {
+      headers: {
+        token:
+          // "Bearer " + serviceLocalStorageUser.user.get()?.accessToken,
+          "fdasf",
+      },
+    });
+  },
 };

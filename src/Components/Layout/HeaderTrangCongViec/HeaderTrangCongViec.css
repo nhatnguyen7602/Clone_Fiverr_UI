@@ -1,12 +1,11 @@
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css";
 
-/* search  */
+/* start search  */
 .headerTrangCongViec form {
   display: inline-block;
   margin: 0 auto;
 }
-
-.pseudo-search {
+.headerTrangCongViec .pseudo-search {
   /* display: inline; */
   /* border: 2px solid #ccc; */
   /* border-radius: 5px; */
@@ -15,29 +14,18 @@
   margin: 0 20px;
   background-color: white;
 }
-.pseudo-search input {
+.headerTrangCongViec .pseudo-search input {
   border: 0;
   background-color: transparent;
   /* width: 300px; */
   /* width: 100%; */
 }
-.pseudo-search input {
+.headerTrangCongViec .pseudo-search input {
   padding: 10px 15px;
   border: 2px solid #ccc;
   border-radius: 5px 0 0 5px;
   border-right: none;
 }
-.pseudo-search button,
-.pseudo-search i {
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-.pseudo-search select {
-  border: none;
-}
-/* search  */
-
 /* hover  */
 .headerTrangCongViec li a {
   color: black;
@@ -48,14 +36,16 @@
 .headerTrangCongViec li:hover a {
   color: #48d048;
 }
-.pseudo-search button {
+.headerTrangCongViec .pseudo-search button {
   padding: 15px 20px;
   color: white;
   background-color: black;
   border-radius: 0 5px 5px 0;
 }
-.pseudo-search input:focus {
+.headerTrangCongViec .pseudo-search input:focus {
   outline: none;
   border-color: black;
 }
 /* hover  */
+
+/* end search  */

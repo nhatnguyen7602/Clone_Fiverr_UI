@@ -4,15 +4,21 @@ import { serviceCongViec } from "../../services/serviceCongViec";
 import CardCongViec from "../../Components/CardCongviec/CardCongViec";
 import { Col, Divider, Pagination, Row, Slider } from "antd";
 import "./trangCongViec.css";
+import { useDispatch } from "react-redux";
+import {
+  setLoadingOffAction,
+  setLoadingOnAction,
+} from "../../redux/actions/actionTrangLoading";
 
 export default function TrangDanhSachCongViec(props) {
+  let dispatch = useDispatch();
   let { tenCongViec } = useParams();
 
   const [danhSachCongViecTheoTen, setDanhSachCongViecTheoTen] = useState([]);
   let [dataRender, setDataRender] = useState([]);
 
   useEffect(() => {
-    // dispatch(setLoadingOnAction());
+    dispatch(setLoadingOnAction());
     serviceCongViec
       .layDanhSachCongViecTheoTen(tenCongViec)
       .then((res) => {
@@ -20,11 +26,11 @@ export default function TrangDanhSachCongViec(props) {
         setDanhSachCongViecTheoTen(result);
         setDataRender(result.slice(0, 4));
 
-        // dispatch(setLoadingOffAction());
+        dispatch(setLoadingOffAction());
       })
       .catch((err) => {
         console.log(err);
-        // dispatch(setLoadingOffAction());
+        dispatch(setLoadingOffAction());
       });
   }, []);
 

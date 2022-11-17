@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import "./HeaderTrangCongViec.css";
+import "./headerTrangCongViec.css";
 
 export default function HeaderTrangCongViec() {
   let navigate = useNavigate();
@@ -109,12 +109,16 @@ export default function HeaderTrangCongViec() {
               </li>
             </ul>
             <div className="items-center flex-shrink-0 hidden lg:flex">
-              <button className="self-center px-8 py-3 rounded hover:text-[#48d048]">
-                Sign in
-              </button>
-              <button className="self-center px-8 py-3 font-semibold rounded border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white duration-500">
-                Join
-              </button>
+              <NavLink to={`/trangDangNhap`}>
+                <button className="self-center px-8 py-3 rounded text-black hover:text-[#48d048]">
+                  Sign in
+                </button>
+              </NavLink>
+              <NavLink to={`/trangDangKy`}>
+                <button className="self-center px-8 py-1 font-semibold rounded border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white duration-500">
+                  Join
+                </button>
+              </NavLink>
             </div>
           </div>
 

@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import "antd/dist/antd.css";
+import "./assets/styleAdmin.css";
 import CategoriesMenu from "./Components/Layout/CategoriesMenu/CategoriesMenu";
 import LayoutFiverr from "./Components/Layout/LayoutFiverr";
 import LayoutTrangCongViec from "./Components/Layout/LayoutTrangCongViec";
@@ -13,6 +14,10 @@ import TrangDangNhap from "./pages/TrangDangNhap/TrangDangNhap";
 import TrangDanhSachCongViec from "./pages/TrangDanhSachCongViec/TrangDanhSachCongViec";
 import TrangDanhSachCongViecVaLoaiCongViec from "./pages/TrangDanhSachCongViecVaLoaiCongViec/TrangDanhSachCongViecVaLoaiCongViec";
 import TrangLoading from "./pages/TrangLoading/TrangLoading";
+import TrangQuanLyUser from "./pages/TrangAdmin/TrangQuanLyUser/TrangQuanLyUser";
+import TrangQuanLyCongViec from "./pages/TrangAdmin/TrangQuanLyCongViec/TrangQuanLyCongViec";
+import TrangQuanLyLoaiCongViec from "./pages/TrangAdmin/TrangQuanLyLoaiCongViec/TrangQuanLyLoaiCongViec";
+import TrangQuanLyDichVu from "./pages/TrangAdmin/TrangQuanLyDichVu/TrangQuanLyDichVu";
 import TrangError from "./pages/TrangError/TrangError";
 
 function App() {
@@ -21,13 +26,26 @@ function App() {
       <TrangLoading />
       <BrowserRouter>
         <Routes>
-          {/* TrangAdmin */}
           <Route
             path="/admin"
-            element={<LayoutFiverr Component={TrangAdmin} />}
+            element={<TrangAdmin Component={TrangQuanLyUser} />}
           />
 
-          {/* TrangChiTietCongViec */}
+          <Route
+            path="/admin/job"
+            element={<TrangAdmin Component={TrangQuanLyCongViec} />}
+          />
+
+          <Route
+            path="/admin/typejob"
+            element={<TrangAdmin Component={TrangQuanLyLoaiCongViec} />}
+          />
+
+          <Route
+            path="/admin/service"
+            element={<TrangAdmin Component={TrangQuanLyDichVu} />}
+          />
+
           <Route
             path="/chiTietCongViec/:maCongViec"
             element={<LayoutTrangCongViec Component={TrangChiTietCongViec} />}
@@ -36,7 +54,9 @@ function App() {
           {/* TrangChiTietThongTinCaNhan */}
           <Route
             path="/trangThongTinCaNhan"
-            element={<LayoutFiverr Component={TrangChiTietThongTinCaNhan} />}
+            element={
+              <LayoutTrangCongViec Component={TrangChiTietThongTinCaNhan} />
+            }
           />
 
           {/* TrangChu */}

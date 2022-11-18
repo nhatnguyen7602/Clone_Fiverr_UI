@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { serviceNguoiDung } from "../../services/serviceNguoiDung";
@@ -7,11 +6,9 @@ import { message } from "antd";
 
 export default function TrangDangKy() {
   let navigate = useNavigate();
-  let dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
-      id: new Date().getTime(),
       name: "",
       email: "",
       password: "",
@@ -34,7 +31,7 @@ export default function TrangDangKy() {
   let onSuccess = () => {
     message.success("Đăng ký thành công");
     setTimeout(() => {
-      navigate("/trangDangNhap");
+      navigate("/");
 
       // history.back();""
     }, 1000);
@@ -62,7 +59,7 @@ export default function TrangDangKy() {
                 type="text"
                 name="name"
                 id="name"
-                placeholder="duongcute"
+                placeholder="Xuan Duong"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
               />
             </div>

@@ -168,7 +168,7 @@ export default function TrangChiTietCongViec() {
         className="bangGia w-2/5 sm:pl-20 sm:pr-20 lg:pl-32 lg:pr-0"
         style={{ minWidth: 518 }}
       >
-        <BangGia moTaNgan={moTaNgan} />
+        <BangGia moTaNgan={moTaNgan} maCongViec={maCongViec} />
       </div>
     </div>
   );

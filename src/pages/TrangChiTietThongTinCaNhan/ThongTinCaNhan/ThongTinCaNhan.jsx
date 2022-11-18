@@ -17,6 +17,11 @@ const ThongTinCaNhan = () => {
   const [modalOpen, setModalOpen] = useState({ modalName: "", isOpen: false });
   const idUser = serviceLocalStorage.user.get().user.id;
 
+  let avatar;
+  info.avatar
+    ? (avatar = info.avatar)
+    : (avatar = "https://joeschmoe.io/api/v1/random");
+
   useEffect(() => {
     userServ
       .layNguoiDungTheoId(idUser)
@@ -55,7 +60,7 @@ const ThongTinCaNhan = () => {
         width: 400,
       }}
     >
-      <Avatar size={120} icon={<UserOutlined />} src={info.avatar} />
+      <Avatar size={120} icon={<UserOutlined />} src={avatar} />
 
       {info.role === "ADMIN" ? (
         <div className="text-xl flex items-center justify-center">

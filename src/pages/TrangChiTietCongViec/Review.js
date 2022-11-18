@@ -124,7 +124,7 @@ export default function Review({ maCongViec }) {
         // });
 
         let ordersData = result.map((item) => {
-          console.log("item: ", item);
+          // console.log("item: ", item);
           let avatar;
           item.avatar
             ? (avatar = item.avatar)

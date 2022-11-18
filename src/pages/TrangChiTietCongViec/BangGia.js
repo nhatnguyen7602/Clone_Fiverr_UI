@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs } from "antd";
+import { message, Tabs } from "antd";
 
 import {
   FieldTimeOutlined,
@@ -7,8 +7,51 @@ import {
   CheckOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
+import { dichVuServ } from "../../services/serviceThueCongViec";
+import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import moment from "moment";
+import { serviceLocalStorage } from "../../services/serviceLocalStorage";
 
-export default function BangGia({ moTaNgan }) {
+export default function BangGia({ moTaNgan, maCongViec }) {
+  let { userInfor } = useSelector((state) => state.reducerQuanLyNguoiDung);
+
+  const handleBookJob = () => {
+    console.log("continue");
+    console.log("userInfor: ", userInfor);
+    if (!userInfor) {
+      return (window.location.href = "/trangDangNhap");
+    }
+
+    let thongTinBookJob = {
+      maCongViec: maCongViec,
+      maNguoiThue: serviceLocalStorage.user.get()?.user.id,
+      ngayThue: moment().format("DD/MM/YYYY"),
+      hoanThanh: true,
+    };
+
+    dichVuServ
+      .thueCongViec(thongTinBookJob)
+      .then((res) => {
+        onSuccess();
+      })
+      .catch((err) => {
+        console.log(err);
+        onFail();
+      });
+  };
+  let onSuccess = () => {
+    message.success("Thuê thành công");
+    setTimeout(() => {
+      // navigate(-1);
+      window.location.href = "/";
+      // window.location.reload(true);
+      // history.back();
+    }, 1000);
+  };
+  let onFail = () => {
+    message.error("Thuê thất bại");
+  };
   const items = [
     {
       label: "Basic",
@@ -60,7 +103,12 @@ export default function BangGia({ moTaNgan }) {
               </li>
             </ul>
           </div>
-          <button className="w-full px-8 py-3 font-semibold rounded-xl bg-green-600 text-gray-100 text-xl">
+          <button
+            onClick={() => {
+              handleBookJob();
+            }}
+            className="w-full px-8 py-3 font-semibold rounded-xl bg-green-600 text-gray-100 border-2 text-xl hover:bg-white hover:text-green-600 hover:border-green-600 duration-300"
+          >
             Continue ($10)
           </button>
           <p className="text-green-600 text-xl text-center font-normal mt-4 mb-2">
@@ -119,7 +167,12 @@ export default function BangGia({ moTaNgan }) {
               </li>
             </ul>
           </div>
-          <button className="w-full px-8 py-3 font-semibold rounded-xl bg-green-600 text-gray-100 text-xl">
+          <button
+            onClick={() => {
+              handleBookJob();
+            }}
+            className="w-full px-8 py-3 font-semibold rounded-xl bg-green-600 text-gray-100 border-2 text-xl hover:bg-white hover:text-green-600 hover:border-green-600 duration-300"
+          >
             Continue ($105)
           </button>
           <p className="text-green-600 text-xl text-center font-normal mt-4 mb-2">
@@ -178,7 +231,12 @@ export default function BangGia({ moTaNgan }) {
               </li>
             </ul>
           </div>
-          <button className="w-full px-8 py-3 font-semibold rounded-xl bg-green-600 text-gray-100 text-xl">
+          <button
+            onClick={() => {
+              handleBookJob();
+            }}
+            className="w-full px-8 py-3 font-semibold rounded-xl bg-green-600 text-gray-100 border-2 text-xl hover:bg-white hover:text-green-600 hover:border-green-600 duration-300"
+          >
             Continue ($250)
           </button>
           <p className="text-green-600 text-xl text-center font-normal mt-4 mb-2">

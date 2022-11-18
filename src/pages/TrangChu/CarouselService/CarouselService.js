@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 // css
 import "./carouselService.css";
@@ -8,10 +8,9 @@ import Slider from "react-slick";
 import { dataCarouselHomePage } from "./dataCarouselHomePage";
 
 export default function CarouselService() {
-  const [defaultImage, setDefaultImage] = useState({});
   const settings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 5,
@@ -44,35 +43,20 @@ export default function CarouselService() {
     ],
   };
 
-  // const handleErrorImage = (data) => {
-  //   setDefaultImage((prev) => ({
-  //     ...prev,
-  //     [data.target.alt]: data.target.alt,
-  //     linkDefault: imgGirl,
-  //   }));
-  // };
-
   return (
     <div className="caourselService">
-      <h1 className="text-left text-5xl">Popular professional services</h1>
+      <h1 className="text-left text-4xl font-bold mb-5">
+        Popular professional services
+      </h1>
       <Slider {...settings}>
         {dataCarouselHomePage.map((item) => (
           <div className="card">
             <div className="card-top">
-              <img
-                src={
-                  defaultImage[item.title] === item.title
-                    ? defaultImage.linkDefault
-                    : item.linkImg
-                }
-                alt={item.title}
-                // onError={handleErrorImage}
-              />
-              <h1>{item.title}</h1>
+              <img src={item.linkImg} alt={item.title} />
             </div>
-            <div className="card-bottom">
-              <h3>{item.price}</h3>
-              <span className="category">{item.category}</span>
+            <div className="card-bottom text-left">
+              <h3 className="text-white text-base mb-1">{item.title}</h3>
+              <h1 className="category text-white text-2xl">{item.category}</h1>
             </div>
           </div>
         ))}

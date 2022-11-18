@@ -115,7 +115,7 @@ export default function TrangDangNhap() {
             <div className="border-b-2"></div>
             or
             <NavLink
-              to="/sign-in/sign-up"
+              to={`/trangDangKy`}
               className="hover:underline text-white mx-5"
             >
               <button className="w-2/3 mt-3 px-8 py-3 font-semibold rounded-md bg-green-600 text-gray-50 hover:bg-green-700 transition duration-500">

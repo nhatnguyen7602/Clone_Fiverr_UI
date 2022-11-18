@@ -56,11 +56,13 @@ export default function TrangChiTietCongViec() {
   } = congViecContent;
 
   let renderBreadcrumb = () => {
-    console.log("maChiTietLoaiCongViec: ", maChiTietLoaiCongViec);
+    // console.log("maChiTietLoaiCongViec: ", maChiTietLoaiCongViec);
 
     return (
       <Breadcrumb separator=">">
-        <Breadcrumb.Item href={`/categories/${maChiTietLoaiCongViec}`}>
+        <Breadcrumb.Item
+          href={`/trangDanhSachCongViecVaLoaiCongViec/${maChiTietLoaiCongViec}`}
+        >
           <span className="font-semibold text-base text-blue-500">
             {tenLoaiCongViec}
           </span>
@@ -86,8 +88,8 @@ export default function TrangChiTietCongViec() {
 `;
 
   return (
-    <div className="trangChiTietCongViec py-5 px-28 text-left flex">
-      <div className="congViec w-3/5">
+    <div className="trangChiTietCongViec w-screen py-5 px-28 text-left flex justify-center flex-wrap lg:flex-nowrap">
+      <div className="congViec w-3/5 mb-5">
         <div className="breadcrum">{renderBreadcrumb()}</div>
 
         <div className="gioiThieuCongViec mt-4">
@@ -140,7 +142,7 @@ export default function TrangChiTietCongViec() {
           </button>
         </div>
         {/* FQA  */}
-        <div className="fqaSeller">
+        <div className="fQASeller">
           <div className="font-semibold text-2xl mt-10 mb-4">FQA</div>
           <Collapse bordered={false} className="bg-transparent">
             <Panel header="Do you provide regular updates on order?" key="1">
@@ -160,17 +162,12 @@ export default function TrangChiTietCongViec() {
 
         {/* Review */}
         <Review maCongViec={maCongViec} />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
       </div>
 
-      <div className="bangGia w-2/5 pl-32">
+      <div
+        className="bangGia w-2/5 sm:pl-20 sm:pr-20 lg:pl-32 lg:pr-0"
+        style={{ minWidth: 518 }}
+      >
         <BangGia moTaNgan={moTaNgan} />
       </div>
     </div>

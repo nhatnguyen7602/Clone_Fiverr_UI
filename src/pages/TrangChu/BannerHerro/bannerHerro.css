@@ -9,7 +9,7 @@
   align-items: center;
   /* margin: 50px; */
   padding: 100px;
-  background-color: black;
+  background-color: transparent;
   color: white;
 }
 #bannerHerro .contentBannder {
@@ -46,6 +46,7 @@
   border-radius: 5px 0 0 5px;
   background-color: white;
   border-right: none;
+  color: black;
 }
 /* hover  */
 #bannerHerro li a {

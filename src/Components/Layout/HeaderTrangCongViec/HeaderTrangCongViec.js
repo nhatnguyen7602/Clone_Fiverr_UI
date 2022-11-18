@@ -1,10 +1,17 @@
 import React, { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./HeaderTrangCongViec.css";
+import { dangXuatAction } from "../../../redux/actions/actionQuanLyNguoiDung";
+import { serviceLocalStorage } from "../../../services/serviceLocalStorage";
+import "./headerTrangCongViec.css";
 
 export default function HeaderTrangCongViec() {
   let navigate = useNavigate();
+  let dispatch = useDispatch();
+
   let inputSearch = useRef(null);
+  let { userInfor } = useSelector((state) => state.reducerQuanLyNguoiDung);
 
   // let [userLogin, setUserLogin] = useState({ userName: "" });
 
@@ -20,6 +27,50 @@ export default function HeaderTrangCongViec() {
     // <NavLink to={`/danhSachCongViec/${inputSearch.current.value}`} />;
     // navigate("/");
   };
+
+  let handleLogOut = () => {
+    serviceLocalStorage.user.remove();
+    dispatch(dangXuatAction());
+    window.location.href = "/trangDangNhap";
+  };
+
+  let renderUserNav = () => {
+    if (!userInfor) {
+      return (
+        <>
+          <NavLink to={`/trangDangNhap`}>
+            <button className="self-center px-8 py-3 rounded text-black hover:text-[#48d048]">
+              Sign in
+            </button>
+          </NavLink>
+          <NavLink to={`/trangDangKy`}>
+            <button className="self-center px-8 py-1 font-semibold rounded border-2 border-green-500 text-green-500 hover:text-white hover:bg-green-500 duration-500">
+              Join
+            </button>
+          </NavLink>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <button
+            onClick={() => {
+              handleLogOut();
+            }}
+            className="self-center px-8 py-3 rounded text-black hover:text-[#48d048]"
+          >
+            Logout
+          </button>
+          <NavLink to={`/trangThongTinCaNhan`}>
+            <button className="self-center px-3 py-1 font-semibold rounded border-2 border-green-500 text-green-500 hover:bg-green-500 duration-500">
+              {`${userInfor.user.name.slice(0, 8)}...`}
+            </button>
+          </NavLink>
+        </>
+      );
+    }
+  };
+
   return (
     <>
       <header className="headerTrangCongViec py-4 px-20 text-gray-800 font-semibold text-base">
@@ -109,12 +160,7 @@ export default function HeaderTrangCongViec() {
               </li>
             </ul>
             <div className="items-center flex-shrink-0 hidden lg:flex">
-              <button className="self-center px-8 py-3 rounded hover:text-[#48d048]">
-                Sign in
-              </button>
-              <button className="self-center px-8 py-3 font-semibold rounded border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white duration-500">
-                Join
-              </button>
+              {renderUserNav()}
             </div>
           </div>
 

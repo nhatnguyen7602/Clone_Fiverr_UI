@@ -24,7 +24,7 @@ export const dichVuServ = {
     }),
 
   thueCongViec: (data) => {
-    let uri = `/api/binh-luan`;
+    let uri = `/api/thue-cong-viec`;
     return https.post(uri, data, {
       headers: {
         token: serviceLocalStorage.user.get()?.token,

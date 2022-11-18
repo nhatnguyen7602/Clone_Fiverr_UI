@@ -44,7 +44,7 @@ export default function BangGia({ moTaNgan, maCongViec }) {
     message.success("Thuê thành công");
     setTimeout(() => {
       // navigate(-1);
-      window.location.href = "/";
+      window.location.href = "/trangThongTinCaNhan";
       // window.location.reload(true);
       // history.back();
     }, 1000);

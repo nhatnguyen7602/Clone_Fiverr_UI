@@ -48,4 +48,14 @@ export const dichVuServ = {
         TokenCybersoft: TOKEN_CYBERSOFT,
       },
     }),
+
+  layCongViecDaThueTheoUser: (token) =>
+    axios({
+      url: `${BASE_URL}/api/thue-cong-viec/lay-danh-sach-da-thue`,
+      method: "GET",
+      headers: {
+        token,
+        TokenCybersoft: TOKEN_CYBERSOFT,
+      },
+    }),
 };

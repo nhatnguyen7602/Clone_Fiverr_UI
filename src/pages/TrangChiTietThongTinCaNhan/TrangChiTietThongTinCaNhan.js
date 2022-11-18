@@ -1,17 +1,20 @@
 import React from "react";
 import ThongTinCaNhan from "./ThongTinCaNhan/ThongTinCaNhan";
 import CongViecDaThue from ".//CongViecDaThue/CongViecDaThue";
+import { serviceLocalStorage } from "../../services/serviceLocalStorage";
 
 export default function TrangChiTietThongTinCaNhan() {
+  const tokenUser = serviceLocalStorage.user.get().token;
+
   return (
     <div className="py-4">
-      <div className="container mx-auto flex justify-between">
+      <div className="container mx-auto flex">
         <div className="mr-4">
           <ThongTinCaNhan />
         </div>
 
-        <div>
-          <CongViecDaThue />
+        <div className="w-full">
+          <CongViecDaThue tokenUser={tokenUser} />
         </div>
       </div>
     </div>

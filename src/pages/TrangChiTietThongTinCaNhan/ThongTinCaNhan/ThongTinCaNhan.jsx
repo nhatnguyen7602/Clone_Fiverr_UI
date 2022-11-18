@@ -6,19 +6,19 @@ import {
 } from "@ant-design/icons";
 import { Avatar, Card, Tag, Modal } from "antd";
 import React, { useEffect, useState } from "react";
+import { serviceLocalStorage } from "../../../services/serviceLocalStorage";
 import { userServ } from "../../../services/serviceNguoiDung";
 import { THEM_MODAL } from "../../TrangAdmin/constantAdmin";
 import TrangSuaUser from "../../TrangAdmin/TrangQuanLyUser/TrangSuaUser/TrangSuaUser";
 import TrangThemUser from "../../TrangAdmin/TrangQuanLyUser/TrangThemUser/TrangThemUser";
 const ThongTinCaNhan = () => {
-  console.log("Render");
-
   const [info, setInfo] = useState({});
   const [modalOpen, setModalOpen] = useState({ modalName: "", isOpen: false });
+  const idUser = serviceLocalStorage.user.get().user.id;
 
   useEffect(() => {
     userServ
-      .layNguoiDungTheoId(1497)
+      .layNguoiDungTheoId(idUser)
       .then((res) => {
         setInfo(res.data.content);
       })
@@ -102,6 +102,7 @@ const ThongTinCaNhan = () => {
       </button>
 
       <Modal
+        zIndex={45}
         centered
         open={modalOpen.isOpen}
         onOk={handleOk}

@@ -1,50 +1,108 @@
-import { LikeOutlined, MessageOutlined, StarOutlined } from "@ant-design/icons";
-import { Avatar, List, Space } from "antd";
+import {
+  LikeOutlined,
+  MessageOutlined,
+  StarOutlined,
+  DeleteFilled,
+} from "@ant-design/icons";
+import { Avatar, List, Space, Popconfirm, message } from "antd";
 import React from "react";
-const data = Array.from({
-  length: 3,
-}).map((_, i) => ({
-  href: "https://ant.design",
-  title: `ant design part ${i}`,
-  avatar: "https://joeschmoe.io/api/v1/random",
-  description:
-    "Ant Design, a design language for background applications, is refined by Ant UED Team.",
-  content:
-    "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
-}));
+import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {
+  setLoadingOffAction,
+  setLoadingOnAction,
+} from "../../../redux/actions/actionTrangLoading";
+import { dichVuServ } from "../../../services/serviceThueCongViec";
 
-const CongViecDaThue = () => (
-  <List
-    bordered
-    style={{ backgroundColor: "#fff", borderColor: "#e5e7eb" }}
-    itemLayout="vertical"
-    size="small"
-    pagination={{
-      onChange: (page) => {
-        console.log(page);
-      },
-      pageSize: 3,
-    }}
-    dataSource={data}
-    renderItem={(item) => (
-      <List.Item
-        key={item.title}
-        extra={
-          <img
-            width={272}
-            alt="logo"
-            src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-          />
-        }
-      >
-        <List.Item.Meta
-          // avatar={<Avatar src={item.avatar} />}
-          title={<a href={item.href}>{item.title}</a>}
-          description={item.description}
-        />
-        {item.content}
-      </List.Item>
-    )}
-  />
-);
+const CongViecDaThue = ({ tokenUser }) => {
+  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+
+  const titleXoa = `Bạn có chắc muốn xoá?`;
+
+  const handleXoaDichVu = (id) => {
+    dispatch(setLoadingOnAction());
+
+    dichVuServ
+      .xoaDichVu(id)
+      .then(() => {
+        message.success("Xoá dịch vụ thành công!");
+        dichVuServ
+          .layCongViecDaThueTheoUser(tokenUser)
+          .then((res) => {
+            setData(res.data.content);
+            dispatch(setLoadingOffAction());
+          })
+          .catch((err) => {
+            console.log(err);
+            dispatch(setLoadingOffAction());
+          });
+      })
+      .catch((err) => {
+        message.error(err.response?.data);
+        dispatch(setLoadingOffAction());
+      });
+  };
+
+  useEffect(() => {
+    dispatch(setLoadingOnAction());
+
+    dichVuServ
+      .layCongViecDaThueTheoUser(tokenUser)
+      .then((res) => {
+        setData(res.data.content);
+        dispatch(setLoadingOffAction());
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(setLoadingOffAction());
+      });
+  }, []);
+
+  return data.length !== 0 ? (
+    <List
+      bordered
+      style={{
+        backgroundColor: "#fff",
+        borderColor: "#e5e7eb",
+        width: "100%",
+      }}
+      itemLayout="vertical"
+      size="small"
+      dataSource={data}
+      renderItem={(item) => (
+        <List.Item
+          key={item.id}
+          extra={<img width={272} alt="logo" src={item.congViec.hinhAnh} />}
+        >
+          <List.Item.Meta title={item.congViec.tenCongViec} />
+
+          {item.congViec.moTa}
+
+          <Popconfirm
+            placement="right"
+            title={titleXoa}
+            onConfirm={() => {
+              handleXoaDichVu(item.id);
+            }}
+            okText="Xoá"
+            cancelText="Huỷ"
+          >
+            <button className="flex text-2xl">
+              <DeleteFilled style={{ color: "#e63946" }} />
+            </button>
+          </Popconfirm>
+        </List.Item>
+      )}
+    />
+  ) : (
+    <div
+      className="border h-full flex items-center justify-center text-2xl text-red-400"
+      style={{ borderColor: "#e5e7eb" }}
+    >
+      Không có công việc đã thuê
+    </div>
+  );
+};
 export default CongViecDaThue;

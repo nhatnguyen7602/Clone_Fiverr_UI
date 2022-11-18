@@ -39,7 +39,9 @@ export default function CategoriesMenu() {
           {/* <Link to={`/categories/${loaiCongViec.id}`}> */}
           <button
             onClick={() => {
-              navigate(`/categories/${loaiCongViec.id}`);
+              navigate(
+                `/trangDanhSachCongViecVaLoaiCongViec/${loaiCongViec.id}`
+              );
               window.location.reload();
             }}
             className="mx-5 py-3 font-semibold drop-shadow-sm text-gray-500 border-b-2 border-transparent hover:text-[#48d048] hover:border-[#48d048] duration-300"

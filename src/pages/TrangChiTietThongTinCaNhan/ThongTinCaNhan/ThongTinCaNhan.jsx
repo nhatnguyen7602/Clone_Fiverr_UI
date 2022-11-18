@@ -6,6 +6,7 @@ import {
 } from "@ant-design/icons";
 import { Avatar, Card, Tag, Modal } from "antd";
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { serviceLocalStorage } from "../../../services/serviceLocalStorage";
 import { userServ } from "../../../services/serviceNguoiDung";
 import { THEM_MODAL } from "../../TrangAdmin/constantAdmin";
@@ -56,7 +57,21 @@ const ThongTinCaNhan = () => {
     >
       <Avatar size={120} icon={<UserOutlined />} src={info.avatar} />
 
-      <div className="text-xl">{info.name}</div>
+      {info.role === "ADMIN" ? (
+        <div className="text-xl flex items-center justify-center">
+          {info.name}
+
+          <NavLink to="/admin">
+            <button className="bg-green-500 text-white text-sm rounded px-2 border-2 border-green-700 ml-2 hover:bg-green-700 transition-all">
+              Admin
+            </button>
+          </NavLink>
+        </div>
+      ) : (
+        <div className="text-xl flex items-center justify-center">
+          {info.name}
+        </div>
+      )}
 
       <div className="border-t-2 w-full my-5"></div>
 

@@ -138,17 +138,6 @@ const TrangSuaUser = ({ infoUser }) => {
           </Select>
         </Form.Item>
 
-        <Form.Item label="Loại quyền">
-          <Select
-            className="w-full"
-            value={formik.values.role}
-            onChange={handleChangeValue("role")}
-          >
-            <Option value="USER">Khách hàng</Option>
-            <Option value="ADMIN">Quản trị viên</Option>
-          </Select>
-        </Form.Item>
-
         <Form.Item label="Kỹ năng">
           <Select
             mode="tags"

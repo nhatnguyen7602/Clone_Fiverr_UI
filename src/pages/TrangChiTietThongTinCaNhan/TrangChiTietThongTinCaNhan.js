@@ -7,7 +7,7 @@ export default function TrangChiTietThongTinCaNhan() {
   const tokenUser = serviceLocalStorage.user.get().token;
 
   return (
-    <div className="py-4">
+    <div className="pt-4">
       <div className="container mx-auto flex">
         <div className="mr-4">
           <ThongTinCaNhan />

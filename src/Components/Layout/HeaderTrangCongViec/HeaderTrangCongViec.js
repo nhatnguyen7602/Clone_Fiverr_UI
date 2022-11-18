@@ -62,7 +62,7 @@ export default function HeaderTrangCongViec() {
             Logout
           </button>
           <NavLink to={`/trangThongTinCaNhan`}>
-            <button className="self-center px-3 py-1 font-semibold rounded border-2 border-green-500 text-green-500 hover:bg-green-500 duration-500">
+            <button className="self-center px-3 py-1 font-semibold rounded border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white duration-500">
               {`${userInfor.user.name.slice(0, 8)}...`}
             </button>
           </NavLink>

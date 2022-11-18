@@ -17,10 +17,17 @@ import React, { Fragment, useState } from "react";
 import { Option } from "antd/lib/mentions";
 import moment from "moment/moment";
 import { userServ } from "../../../../services/serviceNguoiDung";
+import { useDispatch } from "react-redux";
+import {
+  setLoadingOffAction,
+  setLoadingOnAction,
+} from "../../../../redux/actions/actionTrangLoading";
 
 const children = [];
 
 const TrangThemUser = () => {
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -35,13 +42,17 @@ const TrangThemUser = () => {
     },
 
     onSubmit: (values) => {
+      dispatch(setLoadingOnAction());
+
       userServ
         .themNguoiDung(values)
         .then(() => {
           message.success("Thêm người dùng thành công!");
+          dispatch(setLoadingOffAction());
         })
         .catch((err) => {
           message.error(err.response?.data);
+          dispatch(setLoadingOffAction());
         });
     },
   });

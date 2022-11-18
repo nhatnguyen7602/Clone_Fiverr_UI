@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import "antd/dist/antd.css";
 import "./assets/styleAdmin.css";
-import LayoutFiverr from "./Components/Layout/LayoutFiverr";
 import CategoriesMenu from "./Components/Layout/CategoriesMenu/CategoriesMenu";
 import LayoutFiverr from "./Components/Layout/LayoutFiverr";
 import LayoutTrangCongViec from "./Components/Layout/LayoutTrangCongViec";
@@ -28,6 +27,26 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
+            path="/admin"
+            element={<TrangAdmin Component={TrangQuanLyUser} />}
+          />
+
+          <Route
+            path="/admin/job"
+            element={<TrangAdmin Component={TrangQuanLyCongViec} />}
+          />
+
+          <Route
+            path="/admin/typejob"
+            element={<TrangAdmin Component={TrangQuanLyLoaiCongViec} />}
+          />
+
+          <Route
+            path="/admin/service"
+            element={<TrangAdmin Component={TrangQuanLyDichVu} />}
+          />
+
+          <Route
             path="/chiTietCongViec/:maCongViec"
             element={<LayoutTrangCongViec Component={TrangChiTietCongViec} />}
           />
@@ -35,7 +54,9 @@ function App() {
           {/* TrangChiTietThongTinCaNhan */}
           <Route
             path="/trangThongTinCaNhan"
-            element={<LayoutFiverr Component={TrangChiTietThongTinCaNhan} />}
+            element={
+              <LayoutTrangCongViec Component={TrangChiTietThongTinCaNhan} />
+            }
           />
 
           {/* TrangChu */}

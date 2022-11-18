@@ -4,7 +4,7 @@ import CongViecDaThue from ".//CongViecDaThue/CongViecDaThue";
 
 export default function TrangChiTietThongTinCaNhan() {
   return (
-    <div className="bg-slate-50 py-4">
+    <div className="py-4">
       <div className="container mx-auto flex justify-between">
         <div className="mr-4">
           <ThongTinCaNhan />

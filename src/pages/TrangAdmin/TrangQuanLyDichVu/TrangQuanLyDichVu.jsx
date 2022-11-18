@@ -31,6 +31,10 @@ import {
 } from "../constantAdmin";
 import { jobServ } from "../../../services/serviceCongViec";
 import { dichVuServ } from "../../../services/serviceThueCongViec";
+import {
+  setLoadingOffAction,
+  setLoadingOnAction,
+} from "../../../redux/actions/actionTrangLoading";
 
 const { Search } = Input;
 
@@ -38,20 +42,25 @@ const TrangQuanLyDichVu = () => {
   const [dataService, setDataService] = useState(null);
   const [modalOpen, setModalOpen] = useState({ modalName: "", isOpen: false });
   const [infoService, setInfoService] = useState(null);
+  const dispatch = useDispatch();
 
   const showModalThem = () => {
     setModalOpen({ modalName: THEM_DICH_VU_MODAL, isOpen: true });
   };
 
   const showModalSua = (id) => {
+    dispatch(setLoadingOnAction());
+
     dichVuServ
       .layDichVuTheoId(id)
       .then((res) => {
         setModalOpen({ modalName: SUA_DICH_VU_MODAL, isOpen: true });
         setInfoService(res.data.content);
+        dispatch(setLoadingOffAction());
       })
       .catch((err) => {
         console.log(err);
+        dispatch(setLoadingOffAction());
       });
   };
 
@@ -66,13 +75,17 @@ const TrangQuanLyDichVu = () => {
   const titleXoa = `Bạn có chắc muốn xoá?`;
 
   const handleXoaDichVu = (id) => {
+    dispatch(setLoadingOnAction());
+
     dichVuServ
       .xoaDichVu(id)
       .then(() => {
         message.success("Xoá dịch vụ thành công!");
+        dispatch(setLoadingOffAction());
       })
       .catch((err) => {
         message.error(err.response?.data);
+        dispatch(setLoadingOffAction());
       });
   };
 
@@ -85,23 +98,29 @@ const TrangQuanLyDichVu = () => {
   };
 
   const onSearch = (value) => {
+    dispatch(setLoadingOnAction());
+
     if (value.length > 0) {
       dichVuServ
         .layDichVuTheoId(value)
         .then((res) => {
           setDataService([res.data.content]);
+          dispatch(setLoadingOffAction());
         })
         .catch((err) => {
           message.error(err.response?.data.message);
+          dispatch(setLoadingOffAction());
         });
     } else {
       dichVuServ
         .layDsDichVu()
         .then((res) => {
           setDataService(res.data.content);
+          dispatch(setLoadingOffAction());
         })
         .catch((err) => {
           console.log(err);
+          dispatch(setLoadingOffAction());
         });
     }
   };
@@ -184,13 +203,17 @@ const TrangQuanLyDichVu = () => {
   ];
 
   useEffect(() => {
+    dispatch(setLoadingOnAction());
+
     dichVuServ
       .layDsDichVu()
       .then((res) => {
         setDataService(res.data.content);
+        dispatch(setLoadingOffAction());
       })
       .catch((err) => {
         console.log(err);
+        dispatch(setLoadingOffAction());
       });
   }, []);
 
@@ -215,6 +238,7 @@ const TrangQuanLyDichVu = () => {
           </Popover>
 
           <Modal
+            zIndex={45}
             centered
             open={modalOpen.isOpen}
             onOk={handleOk}
@@ -229,7 +253,7 @@ const TrangQuanLyDichVu = () => {
       <Search
         className="w-full mb-4"
         size="large"
-        placeholder="Nhập tên mã dịch vụ"
+        placeholder="Nhập mã dịch vụ"
         onSearch={onSearch}
       />
 

@@ -20,6 +20,10 @@ import TrangThemUser from "../TrangQuanLyUser/TrangThemUser/TrangThemUser";
 import TrangSuaUser from "../TrangQuanLyUser/TrangSuaUser/TrangSuaUser";
 import { useDispatch } from "react-redux";
 import { SUA_MODAL, THEM_MODAL, XOA_MODAL } from "../constantAdmin";
+import {
+  setLoadingOffAction,
+  setLoadingOnAction,
+} from "../../../redux/actions/actionTrangLoading";
 
 const { Search } = Input;
 
@@ -35,11 +39,14 @@ const TrangQuanLyUser = () => {
   };
 
   const showModalSua = (id) => {
+    dispatch(setLoadingOnAction());
+
     userServ
       .layNguoiDungTheoId(id)
       .then((res) => {
         setModalOpen({ modalName: SUA_MODAL, isOpen: true });
         setInfoUser(res.data.content);
+        dispatch(setLoadingOffAction());
       })
       .catch((err) => {
         console.log(err);
@@ -57,13 +64,17 @@ const TrangQuanLyUser = () => {
   const titleXoa = `Bạn có chắc muốn xoá?`;
 
   const handleXoaUser = (id) => {
+    dispatch(setLoadingOnAction());
+
     userServ
       .xoaNguoiDung(id)
       .then(() => {
         message.success("Xoá người dùng thành công!");
+        dispatch(setLoadingOffAction());
       })
       .catch((err) => {
         message.error(err.response?.data);
+        dispatch(setLoadingOffAction());
       });
   };
 
@@ -76,23 +87,29 @@ const TrangQuanLyUser = () => {
   };
 
   const onSearch = (value) => {
+    dispatch(setLoadingOnAction());
+
     if (value.length > 0) {
       userServ
         .searchNguoiDung(value)
         .then((res) => {
           setDataUser(res.data.content);
+          dispatch(setLoadingOffAction());
         })
         .catch((err) => {
           console.log(err);
+          dispatch(setLoadingOffAction());
         });
     } else {
       userServ
         .layDsNguoiDung()
         .then((res) => {
           setDataUser(res.data.content);
+          dispatch(setLoadingOffAction());
         })
         .catch((err) => {
           console.log(err);
+          dispatch(setLoadingOffAction());
         });
     }
   };
@@ -170,13 +187,17 @@ const TrangQuanLyUser = () => {
   ];
 
   useEffect(() => {
+    dispatch(setLoadingOnAction());
+
     userServ
       .layDsNguoiDung()
       .then((res) => {
         setDataUser(res.data.content);
+        dispatch(setLoadingOffAction());
       })
       .catch((err) => {
         console.log(err);
+        dispatch(setLoadingOffAction());
       });
   }, []);
 
@@ -201,6 +222,7 @@ const TrangQuanLyUser = () => {
           </Popover>
 
           <Modal
+            zIndex={45}
             centered
             open={modalOpen.isOpen}
             onOk={handleOk}

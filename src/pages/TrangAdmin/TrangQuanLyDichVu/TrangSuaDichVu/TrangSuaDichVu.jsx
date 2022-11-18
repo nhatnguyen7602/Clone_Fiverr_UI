@@ -18,10 +18,16 @@ import moment from "moment/moment";
 import { userServ } from "../../../../services/serviceNguoiDung";
 import { useDispatch } from "react-redux";
 import { dichVuServ } from "../../../../services/serviceThueCongViec";
+import {
+  setLoadingOffAction,
+  setLoadingOnAction,
+} from "../../../../redux/actions/actionTrangLoading";
 
 const { Option } = Select;
 
 const TrangSuaUser = ({ infoService }) => {
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -33,13 +39,17 @@ const TrangSuaUser = ({ infoService }) => {
     },
 
     onSubmit: (values) => {
+      dispatch(setLoadingOnAction());
+
       dichVuServ
         .updateDichVu(values.id, values)
         .then(() => {
           message.success("Cập nhật dịch vụ thành công!");
+          dispatch(setLoadingOffAction());
         })
         .catch((err) => {
           message.error(err.response?.data);
+          dispatch(setLoadingOffAction());
         });
     },
   });

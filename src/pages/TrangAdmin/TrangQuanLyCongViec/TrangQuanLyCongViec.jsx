@@ -27,6 +27,10 @@ import {
 } from "../constantAdmin";
 import { jobServ } from "../../../services/serviceCongViec";
 import TrangSuaCongViec from "./TrangSuaCongViec/TrangSuaCongViec";
+import {
+  setLoadingOffAction,
+  setLoadingOnAction,
+} from "../../../redux/actions/actionTrangLoading";
 
 const { Search } = Input;
 
@@ -42,14 +46,18 @@ const TrangQuanLyCongViec = () => {
   };
 
   const showModalSua = (id) => {
+    dispatch(setLoadingOnAction());
+
     jobServ
       .layCongViecTheoId(id)
       .then((res) => {
         setModalOpen({ modalName: SUA_CONG_VIEC_MODAL, isOpen: true });
         setInfoJob(res.data.content);
+        dispatch(setLoadingOffAction());
       })
       .catch((err) => {
         console.log(err);
+        dispatch(setLoadingOffAction());
       });
   };
 
@@ -64,13 +72,17 @@ const TrangQuanLyCongViec = () => {
   const titleXoa = `Bạn có chắc muốn xoá?`;
 
   const handleXoaUser = (id) => {
+    dispatch(setLoadingOnAction());
+
     jobServ
       .xoaCongViec(id)
       .then(() => {
         message.success("Xoá công việc thành công!");
+        dispatch(setLoadingOffAction());
       })
       .catch((err) => {
         message.error(err.response?.data);
+        dispatch(setLoadingOffAction());
       });
   };
 
@@ -82,25 +94,32 @@ const TrangQuanLyCongViec = () => {
     setModalOpen(false);
   };
 
+  const mapSearch = (data) => data.map((congViec) => congViec.congViec);
+
   const onSearch = (value) => {
+    dispatch(setLoadingOnAction());
+
     if (value.length > 0) {
       jobServ
         .searchCongViec(value)
         .then((res) => {
-          setDataJob(res.data.content.map((congViec) => congViec.congViec));
-          console.log(res);
+          dispatch(setLoadingOffAction());
+          setDataJob(mapSearch(res.data.content));
         })
         .catch((err) => {
           console.log(err);
+          dispatch(setLoadingOffAction());
         });
     } else {
       jobServ
         .layDanhSachCongViec()
         .then((res) => {
           setDataJob(res.data.content);
+          dispatch(setLoadingOffAction());
         })
         .catch((err) => {
           console.log(err);
+          dispatch(setLoadingOffAction());
         });
     }
   };
@@ -177,13 +196,17 @@ const TrangQuanLyCongViec = () => {
   ];
 
   useEffect(() => {
+    dispatch(setLoadingOnAction());
+
     jobServ
       .layDanhSachCongViec()
       .then((res) => {
         setDataJob(res.data.content);
+        dispatch(setLoadingOffAction());
       })
       .catch((err) => {
         console.log(err);
+        dispatch(setLoadingOffAction());
       });
   }, []);
 
@@ -208,6 +231,7 @@ const TrangQuanLyCongViec = () => {
           </Popover>
 
           <Modal
+            zIndex={45}
             centered
             open={modalOpen.isOpen}
             width={1000}

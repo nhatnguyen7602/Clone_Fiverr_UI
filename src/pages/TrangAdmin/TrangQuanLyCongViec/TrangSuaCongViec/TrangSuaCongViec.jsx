@@ -19,6 +19,10 @@ import moment from "moment/moment";
 import { useDispatch } from "react-redux";
 import TextArea from "antd/lib/input/TextArea";
 import { jobServ } from "../../../../services/serviceCongViec";
+import {
+  setLoadingOffAction,
+  setLoadingOnAction,
+} from "../../../../redux/actions/actionTrangLoading";
 
 const TrangSuaCongViec = ({ infoJob }) => {
   const dispatch = useDispatch();
@@ -39,13 +43,17 @@ const TrangSuaCongViec = ({ infoJob }) => {
     },
 
     onSubmit: (values) => {
+      dispatch(setLoadingOnAction());
+
       jobServ
         .capNhatCongViec(values.id, values)
         .then(() => {
           message.success("Cập nhật thành công!");
+          dispatch(setLoadingOffAction());
         })
         .catch((err) => {
           message.error(err.response?.data);
+          dispatch(setLoadingOffAction());
         });
     },
   });

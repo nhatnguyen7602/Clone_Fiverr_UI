@@ -58,7 +58,7 @@ const TrangAdmin = ({ Component }) => (
         </Menu.Item>
       </Menu>
     </Sider>
-    <Layout className="z-50">
+    <Layout className="z-20">
       <Content>
         <div className="site-layout-background px-4 min-h-full">
           <Component />

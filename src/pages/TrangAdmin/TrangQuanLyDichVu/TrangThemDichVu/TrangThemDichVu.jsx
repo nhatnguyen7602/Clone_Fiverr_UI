@@ -19,8 +19,14 @@ import moment from "moment/moment";
 import { useDispatch } from "react-redux";
 import TextArea from "antd/lib/input/TextArea";
 import { dichVuServ } from "../../../../services/serviceThueCongViec.js";
+import {
+  setLoadingOffAction,
+  setLoadingOnAction,
+} from "../../../../redux/actions/actionTrangLoading.js";
 
 const TrangThemDichVu = () => {
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       maCongViec: 0,
@@ -30,13 +36,17 @@ const TrangThemDichVu = () => {
     },
 
     onSubmit: (values) => {
+      dispatch(setLoadingOnAction());
+
       dichVuServ
         .themDichVu(values)
         .then(() => {
           message.success("Thêm dịch vụ thành công!");
+          dispatch(setLoadingOffAction());
         })
         .catch((err) => {
           message.error(err.response?.data);
+          dispatch(setLoadingOffAction());
         });
     },
   });

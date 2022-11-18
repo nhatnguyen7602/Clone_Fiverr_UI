@@ -17,6 +17,10 @@ import React, { Fragment, useState } from "react";
 import moment from "moment/moment";
 import { userServ } from "../../../../services/serviceNguoiDung";
 import { useDispatch } from "react-redux";
+import {
+  setLoadingOffAction,
+  setLoadingOnAction,
+} from "../../../../redux/actions/actionTrangLoading";
 
 const children = [];
 
@@ -40,13 +44,17 @@ const TrangSuaUser = ({ infoUser }) => {
     },
 
     onSubmit: (values) => {
+      dispatch(setLoadingOnAction());
+
       userServ
         .capNhatNguoiDung(values)
         .then(() => {
           message.success("Cập nhật thông tin thành công!");
+          dispatch(setLoadingOffAction());
         })
         .catch((err) => {
           message.error(err.response?.data);
+          dispatch(setLoadingOffAction());
         });
     },
   });

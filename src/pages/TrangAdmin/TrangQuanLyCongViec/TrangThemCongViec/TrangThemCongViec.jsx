@@ -19,6 +19,10 @@ import moment from "moment/moment";
 import { useDispatch } from "react-redux";
 import TextArea from "antd/lib/input/TextArea";
 import { jobServ } from "../../../../services/serviceCongViec";
+import {
+  setLoadingOffAction,
+  setLoadingOnAction,
+} from "../../../../redux/actions/actionTrangLoading";
 
 const TrangThemCongViec = () => {
   const [state, setState] = useState({
@@ -26,8 +30,11 @@ const TrangThemCongViec = () => {
     nhomChiTietLoai: [],
     chiTietLoai: [],
   });
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(setLoadingOnAction());
+
     jobServ
       .layDanhSachLoaiCongViec()
       .then((res) => {
@@ -35,9 +42,11 @@ const TrangThemCongViec = () => {
           ...state,
           loaiCongViec: res.data.content,
         });
+        dispatch(setLoadingOffAction());
       })
       .catch((err) => {
         console.log(err);
+        dispatch(setLoadingOffAction());
       });
   }, []);
 
@@ -76,13 +85,17 @@ const TrangThemCongViec = () => {
     },
 
     onSubmit: (values) => {
+      dispatch(setLoadingOnAction());
+
       jobServ
         .themCongViec(values)
         .then(() => {
           message.success("Thêm công việc thành công!");
+          dispatch(setLoadingOffAction());
         })
         .catch((err) => {
           message.error(err.response?.data);
+          dispatch(setLoadingOffAction());
         });
     },
   });

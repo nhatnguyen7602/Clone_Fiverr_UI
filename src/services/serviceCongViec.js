@@ -63,10 +63,12 @@ export const jobServ = {
 
   searchCongViec: (tenCongViec) => {
     let uri = `/api/cong-viec/lay-danh-sach-cong-viec-theo-ten/${tenCongViec}`;
+
+    return https.get(uri);
   },
 };
 
-import { https } from "./configURL";
+// import { https } from "./configURL";
 // import { serviceLocalStorageUser } from "./serviceLocalStorageUser";
 
 export const serviceCongViec = {

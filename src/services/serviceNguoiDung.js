@@ -47,7 +47,7 @@ export const userServ = {
   },
 };
 
-import { https } from "./configURL";
+// import { https } from "./configURL";
 
 export const serviceNguoiDung = {
   dangNhap: (thongTinDangNhap) => {

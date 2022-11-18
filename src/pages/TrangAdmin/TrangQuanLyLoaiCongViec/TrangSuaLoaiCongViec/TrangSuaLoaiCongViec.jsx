@@ -1,9 +1,16 @@
 import { Form, Input, message } from "antd";
 import { useFormik } from "formik";
 import React, { Fragment } from "react";
+import { useDispatch } from "react-redux";
+import {
+  setLoadingOffAction,
+  setLoadingOnAction,
+} from "../../../../redux/actions/actionTrangLoading";
 import { typeJobServ } from "../../../../services/serviceLoaiCongViec";
 
 const TrangSuaLoaiCongViec = ({ infoTypeJob }) => {
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -12,13 +19,17 @@ const TrangSuaLoaiCongViec = ({ infoTypeJob }) => {
     },
 
     onSubmit: (values) => {
+      dispatch(setLoadingOnAction());
+
       typeJobServ
         .updateLoaiCongViec(values.id, values)
         .then(() => {
           message.success("Cập nhật thành công!");
+          dispatch(setLoadingOffAction());
         })
         .catch((err) => {
           message.error(err.response?.data);
+          dispatch(setLoadingOffAction());
         });
     },
   });

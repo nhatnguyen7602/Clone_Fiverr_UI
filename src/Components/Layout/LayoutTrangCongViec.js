@@ -7,7 +7,7 @@ export default function LayoutTrangCongViec(props) {
   let { Component } = props;
 
   return (
-    <div className="h-screen container">
+    <div className="h-screen container mx-auto">
       <HeaderTrangCongViec />
       <CategoriesMenu />
       {<Component />}

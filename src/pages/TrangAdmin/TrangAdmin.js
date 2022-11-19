@@ -24,7 +24,7 @@ const TrangAdmin = ({ Component }) => (
       }}
     >
       <div className="flex py-4 justify-center">
-        <NavLink>
+        <NavLink to={`/`}>
           <svg
             width="89"
             height="27"

@@ -81,7 +81,16 @@ const TrangQuanLyDichVu = () => {
       .xoaDichVu(id)
       .then(() => {
         message.success("Xoá dịch vụ thành công!");
-        dispatch(setLoadingOffAction());
+        dichVuServ
+          .layDsDichVu()
+          .then((res) => {
+            setDataService(res.data.content);
+            dispatch(setLoadingOffAction());
+          })
+          .catch((err) => {
+            console.log(err);
+            dispatch(setLoadingOffAction());
+          });
       })
       .catch((err) => {
         message.error(err.response?.data);
@@ -215,7 +224,7 @@ const TrangQuanLyDichVu = () => {
         console.log(err);
         dispatch(setLoadingOffAction());
       });
-  }, []);
+  }, [modalOpen]);
 
   return (
     <div>

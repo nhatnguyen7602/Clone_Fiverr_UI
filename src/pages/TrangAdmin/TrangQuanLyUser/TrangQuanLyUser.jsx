@@ -70,7 +70,16 @@ const TrangQuanLyUser = () => {
       .xoaNguoiDung(id)
       .then(() => {
         message.success("Xoá người dùng thành công!");
-        dispatch(setLoadingOffAction());
+        userServ
+          .layDsNguoiDung()
+          .then((res) => {
+            setDataUser(res.data.content);
+            dispatch(setLoadingOffAction());
+          })
+          .catch((err) => {
+            console.log(err);
+            dispatch(setLoadingOffAction());
+          });
       })
       .catch((err) => {
         message.error(err.response?.data);
@@ -199,7 +208,7 @@ const TrangQuanLyUser = () => {
         console.log(err);
         dispatch(setLoadingOffAction());
       });
-  }, []);
+  }, [modalOpen]);
 
   return (
     <div>

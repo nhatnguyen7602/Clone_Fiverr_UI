@@ -78,7 +78,16 @@ const TrangQuanLyCongViec = () => {
       .xoaCongViec(id)
       .then(() => {
         message.success("Xoá công việc thành công!");
-        dispatch(setLoadingOffAction());
+        jobServ
+          .layDanhSachCongViec()
+          .then((res) => {
+            setDataJob(res.data.content);
+            dispatch(setLoadingOffAction());
+          })
+          .catch((err) => {
+            console.log(err);
+            dispatch(setLoadingOffAction());
+          });
       })
       .catch((err) => {
         message.error(err.response?.data);
@@ -208,7 +217,7 @@ const TrangQuanLyCongViec = () => {
         console.log(err);
         dispatch(setLoadingOffAction());
       });
-  }, []);
+  }, [modalOpen]);
 
   return (
     <div>

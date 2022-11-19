@@ -31,7 +31,7 @@ export default function TrangDangKy() {
   let onSuccess = () => {
     message.success("Đăng ký thành công");
     setTimeout(() => {
-      navigate("/");
+      navigate("/trangDangNhap");
 
       // history.back();""
     }, 1000);
